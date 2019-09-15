@@ -3,6 +3,7 @@ package men.brakh.abiturient.model.abiturient.service;
 import men.brakh.abiturient.exception.BadRequestException;
 import men.brakh.abiturient.mapping.mapper.DtoMapper;
 import men.brakh.abiturient.mapping.presenter.EntityPresenter;
+import men.brakh.abiturient.model.ParentAware;
 import men.brakh.abiturient.model.abiturient.Abiturient;
 import men.brakh.abiturient.model.abiturient.dto.AbiturientCreateRequest;
 import men.brakh.abiturient.model.abiturient.dto.AbiturientDto;
@@ -21,11 +22,15 @@ public class AbiturientServiceImpl extends AbstractCRUDEntityService<
         Integer
         > implements AbiturientService {
 
+    private final List<CRUDRepository<? extends ParentAware, Integer>> childEntitiesRepositories;
+
     public AbiturientServiceImpl(final CRUDRepository<Abiturient, Integer> crudRepository,
                                  final DtoMapper<AbiturientDto, Abiturient> dtoMapper,
                                  final EntityPresenter<Abiturient, AbiturientDto> entityPresenter,
-                                 final Validator validator) {
+                                 final Validator validator,
+                                 final List<CRUDRepository<? extends ParentAware, Integer>> childEntitiesRepositories) {
         super(crudRepository, dtoMapper, entityPresenter, validator);
+        this.childEntitiesRepositories = childEntitiesRepositories;
     }
 
     @Override
@@ -35,7 +40,15 @@ public class AbiturientServiceImpl extends AbstractCRUDEntityService<
 
     @Override
     public void delete(final Integer id) throws BadRequestException {
+        childEntitiesRepositories.forEach(
+                childRepository -> childRepository.findAll()
+                        .stream()
+                        .filter(childEntity -> childEntity.getParentId().equals(id))
+                        .forEach(childEntity -> childRepository.delete((Integer) childEntity.getId()))
+        );
+
         deleteTemplate.delete(id);
+
     }
 
     @Override

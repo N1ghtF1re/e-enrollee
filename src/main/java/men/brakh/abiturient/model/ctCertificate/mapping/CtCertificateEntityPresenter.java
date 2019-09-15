@@ -21,9 +21,7 @@ public class CtCertificateEntityPresenter implements EntityPresenter<CtCertifica
 
         if (entity.getAbiturient() != null) {
             ctCertificate.setAbiturientId(entity.getAbiturient().getId());
-            ctCertificate.setAbiturientName(entity.getAbiturient().getFirstName() + " "
-                    + entity.getAbiturient().getMiddleName() + " "
-                    + entity.getAbiturient().getLastName());
+            ctCertificate.setAbiturientName(entity.getAbiturient().getFullName());
         }
 
         return ctCertificate;
@@ -33,7 +31,7 @@ public class CtCertificateEntityPresenter implements EntityPresenter<CtCertifica
     public List<CtCertificateDto> mapListToDto(List<CtCertificate> entities, Class<? extends CtCertificateDto> dtoClass) {
         return entities
                 .stream()
-                .map(ctCertificate -> modelMapper.map(ctCertificate, dtoClass))
+                .map(ctCertificate -> mapToDto(ctCertificate, dtoClass))
                 .collect(Collectors.toList());
 
     }

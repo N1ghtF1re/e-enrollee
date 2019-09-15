@@ -79,7 +79,7 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
     }
 
 
-    protected List<T> loadList()  {
+    private List<T> loadList()  {
         try {
             JsonArray list = gson.fromJson(new FileReader(filePathString), JsonArray.class);
 
@@ -155,11 +155,22 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
         return loadList()
                 .stream()
                 .filter(t -> t.getId().equals(id))
+                .map(this::postProcessEntity)
                 .findFirst();
     }
 
     @Override
     public List<T> findAll() {
-        return loadList();
+        return loadList()
+                .stream()
+                .map(this::postProcessEntity)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Entity post processing.
+     */
+    protected T postProcessEntity(T entity) {
+        return entity;
     }
 }

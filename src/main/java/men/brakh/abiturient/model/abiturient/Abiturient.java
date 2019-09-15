@@ -29,7 +29,7 @@ public class Abiturient implements BaseEntity<Integer> {
     @Pattern(regexp = NAME_REGEX)
     private String middleName;
 
-    @NotNull
+    @NotNull(message = "Birth Date hasn't set or incorrect")
     private Date birthDate;
 
 
@@ -40,5 +40,9 @@ public class Abiturient implements BaseEntity<Integer> {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getFullName() {
+        return firstName + " " + middleName + " " + lastName;
     }
 }

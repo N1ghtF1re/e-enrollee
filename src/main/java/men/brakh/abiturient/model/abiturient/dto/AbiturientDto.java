@@ -1,12 +1,14 @@
 package men.brakh.abiturient.model.abiturient.dto;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@ToString(callSuper = true)
-public class AbiturientDto extends BaseAbiturientDto {
+public class AbiturientDto extends BaseAbiturientDto implements Comparable<AbiturientDto> {
     private Integer id;
 
 
@@ -18,5 +20,24 @@ public class AbiturientDto extends BaseAbiturientDto {
                          final Integer id) {
         super(firstName, lastName, middleName, birthDate);
         this.id = id;
+    }
+
+
+    @Override
+    public String toString() {
+        return String.format("%d | %15s | %15s | %15s | %s",
+                id,
+                getFirstName(),
+                getLastName(),
+                getMiddleName(),
+                getBirthDate()
+                );
+    }
+
+    @Override
+    public int compareTo(final AbiturientDto abiturientDto) {
+        String name1 = this.getFirstName() + this.getMiddleName() + this.getLastName();
+        String name2 = abiturientDto.getFirstName() + abiturientDto.getMiddleName() + abiturientDto.getLastName();
+        return name1.compareTo(name2);
     }
 }

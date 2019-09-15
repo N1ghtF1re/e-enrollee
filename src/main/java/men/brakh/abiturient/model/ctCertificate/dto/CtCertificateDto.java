@@ -1,12 +1,14 @@
 package men.brakh.abiturient.model.ctCertificate.dto;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@ToString(callSuper = true)
-public class CtCertificateDto extends BaseCtCertificateDto {
+public class CtCertificateDto extends BaseCtCertificateDto implements Comparable<CtCertificateDto> {
     private static transient final long serialVersionUID = -7584274006794325399L;
 
     private Integer id;
@@ -26,5 +28,22 @@ public class CtCertificateDto extends BaseCtCertificateDto {
         this.id = id;
         this.abiturientId = abiturientId;
         this.abiturientName = abiturientName;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d | %50s | %s | %s | %15s | %d / 100 | %s year",
+                id,
+                getAbiturientName(),
+                getCertificateIdentifier(),
+                getCertificateNumber(),
+                getSubject(),
+                getCtPoints(),
+                getYear());
+    }
+
+    @Override
+    public int compareTo(final CtCertificateDto ctCertificateDto) {
+        return this.abiturientName.compareTo(ctCertificateDto.abiturientName);
     }
 }

@@ -2,6 +2,7 @@ package men.brakh.abiturient.model.ctCertificate;
 
 import lombok.*;
 import men.brakh.abiturient.model.BaseEntity;
+import men.brakh.abiturient.model.ParentAware;
 import men.brakh.abiturient.model.abiturient.Abiturient;
 
 import javax.validation.constraints.*;
@@ -10,7 +11,7 @@ import javax.validation.constraints.*;
 @Data
 @AllArgsConstructor
 @Builder
-public class CtCertificate implements BaseEntity<Integer> {
+public class CtCertificate implements BaseEntity<Integer>, ParentAware<Integer> {
     private Integer id;
 
     @Min(0)
@@ -43,5 +44,10 @@ public class CtCertificate implements BaseEntity<Integer> {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Integer getParentId() {
+        return abiturient == null ? null : abiturient.getId();
     }
 }

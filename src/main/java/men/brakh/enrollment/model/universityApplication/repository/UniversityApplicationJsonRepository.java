@@ -4,6 +4,7 @@ import men.brakh.enrollment.model.enrollee.repository.EnrolleeRepository;
 import men.brakh.enrollment.model.ctCertificate.repository.CtCertificateRepository;
 import men.brakh.enrollment.model.educationDocument.repository.EducationDocumentRepository;
 import men.brakh.enrollment.model.universityApplication.UniversityApplication;
+import men.brakh.enrollment.model.universityApplication.UniversityApplicationType;
 import men.brakh.enrollment.repository.impl.JsonCRUDRepository;
 
 import java.util.List;
@@ -54,5 +55,14 @@ public class UniversityApplicationJsonRepository extends JsonCRUDRepository<Univ
     public List<UniversityApplication> findByEnrolleeId(final Integer enrolleeId) {
         return find(universityApplication -> universityApplication.
                 getEnrollee().getId().equals(enrolleeId));
+    }
+
+    @Override
+    public List<UniversityApplication> findByEnrolleeIdAndType(final Integer enrolleeId,
+                                                               final UniversityApplicationType type) {
+        return find(universityApplication ->
+                universityApplication.getEnrollee().getId().equals(enrolleeId)
+                && universityApplication.getType().equals(type)
+        );
     }
 }

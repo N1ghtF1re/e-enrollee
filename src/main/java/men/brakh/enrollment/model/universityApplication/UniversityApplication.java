@@ -50,6 +50,9 @@ public class UniversityApplication implements BaseEntity<Integer>, ParentAware<I
     @NotNull
     private Date date;
 
+    @NotNull
+    private UniversityApplicationType type;
+
     @Override
     public UniversityApplication clone() {
         try {

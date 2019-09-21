@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import men.brakh.enrollment.model.Dto;
 import men.brakh.enrollment.model.ctCertificate.dto.CtCertificateDto;
 import men.brakh.enrollment.model.educationDocument.dto.EducationDocumentDto;
+import men.brakh.enrollment.model.universityApplication.UniversityApplicationType;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ public class UniversityApplicationDto implements Dto, Comparable<UniversityAppli
     private Integer id;
 
     private String enrolleeName;
+
     private Integer enrolleeId;
 
     private List<CtCertificateDto> certificates;
@@ -30,6 +32,8 @@ public class UniversityApplicationDto implements Dto, Comparable<UniversityAppli
 
     private String date;
 
+    private String type;
+
     @Builder
     public UniversityApplicationDto(final Integer id,
                         final String enrolleeName,
@@ -37,7 +41,8 @@ public class UniversityApplicationDto implements Dto, Comparable<UniversityAppli
                         final List<CtCertificateDto> certificates,
                         final List<String> specialities,
                         final EducationDocumentDto educationDocument,
-                        final String date) {
+                        final String date,
+                        final String type) {
         this.id = id;
         this.enrolleeName = enrolleeName;
         this.enrolleeId = enrolleeId;
@@ -45,6 +50,7 @@ public class UniversityApplicationDto implements Dto, Comparable<UniversityAppli
         this.specialities = specialities;
         this.educationDocument = educationDocument;
         this.date = date;
+        this.type = type;
     }
 
     @Override
@@ -55,6 +61,7 @@ public class UniversityApplicationDto implements Dto, Comparable<UniversityAppli
     @Override
     public String toString() {
         return "STATEMENT #" + id
+                + "\nTYPE: " + UniversityApplicationType.valueOf(type).getDescription()
                 + "\nABITURIENT: " + enrolleeName + " [" + enrolleeId + "]\n"
                 + "CERTIFICATES: \n"
                 + certificates.stream().map(CtCertificateDto::toString).collect(Collectors.joining("\n"))

@@ -9,6 +9,7 @@ import men.brakh.enrollment.model.ctCertificate.service.CtCertificateService;
 import men.brakh.enrollment.model.educationDocument.dto.EducationDocumentDto;
 import men.brakh.enrollment.model.educationDocument.service.EducationDocumentService;
 import men.brakh.enrollment.model.specialty.Specialty;
+import men.brakh.enrollment.model.universityApplication.UniversityApplicationType;
 import men.brakh.enrollment.model.universityApplication.dto.UniversityApplicationCreateRequest;
 import men.brakh.enrollment.model.universityApplication.dto.UniversityApplicationDto;
 import men.brakh.enrollment.model.universityApplication.dto.UniversityApplicationUpdateRequest;
@@ -76,6 +77,24 @@ public class UniversityApplicationConsoleCRUDController implements ConsoleCRUDCo
         return Arrays.asList(scanner.nextLine().replaceAll(" ", "").split(","));
     }
 
+    private String getApplicationType() throws BadRequestException {
+        System.out.println("Please, select application type: (And enter number of type)");
+
+        UniversityApplicationType[] types = UniversityApplicationType.values();
+
+        for (int i = 0; i < types.length; i++) {
+            System.out.println((i+1) + " - " + types[i].getDescription());
+        }
+
+        int index = getIntId();
+
+        if (index <= 0 || index > types.length) {
+            throw new BadRequestException("Invalid index");
+        }
+
+        return types[index - 1].toString();
+    }
+
     @Override
     public void create() throws BadRequestException {
         final UniversityApplicationCreateRequest.UniversityApplicationCreateRequestBuilder universityApplicationCreateRequestBuilder
@@ -88,6 +107,7 @@ public class UniversityApplicationConsoleCRUDController implements ConsoleCRUDCo
                 .enrolleeId(enrolleeId)
                 .certificateIdsList(getCtCertificatesList(enrolleeId))
                 .educationDocumentId(getEducationDocumentId(enrolleeId))
+                .type(getApplicationType())
                 .specialities(getSpecialities());
 
         universityApplicationService.create(universityApplicationCreateRequestBuilder.build());

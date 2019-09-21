@@ -17,7 +17,7 @@ public class CtCertificateCreateRequest extends BaseCtCertificateDto implements 
                                       final String certificateId,
                                       final String certificateNumber,
                                       final String subject,
-                                      final String year,
+                                      final Integer year,
                                       final Integer abiturientId) {
         super(ctPoints, certificateId, certificateNumber, subject, year);
         this.abiturientId = abiturientId;

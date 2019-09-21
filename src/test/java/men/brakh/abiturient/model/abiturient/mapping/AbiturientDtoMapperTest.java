@@ -25,7 +25,7 @@ public class AbiturientDtoMapperTest {
                 .setAmbiguityIgnored(true)
                 .setPropertyCondition(Conditions.isNotNull());
 
-        dtoMapper = new AbiturientDtoMapper(modelMapper);
+        dtoMapper = new AbiturientDtoMapper(modelMapper, simpleDateFormat);
     }
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");

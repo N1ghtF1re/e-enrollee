@@ -18,13 +18,14 @@ public class SubjectsInCerficiateEqualsSubjectsForSpecialitiesVaidator implement
                 .map(CtCertificate::getSubject)
                 .collect(Collectors.toSet());
 
-        Set<Subject> specialitySubjects = statement.getSpecialties()
+
+        return statement.getSpecialties()
                 .stream()
-                .flatMap(specialty -> specialty.getAllowedSubjects().stream())
-                .collect(Collectors.toSet());
+                .allMatch(
+                        specialty -> specialty.getAllowedSubjects().containsAll(ctSubjects)
 
+                );
 
-        return specialitySubjects.containsAll(ctSubjects);
     }
 
 

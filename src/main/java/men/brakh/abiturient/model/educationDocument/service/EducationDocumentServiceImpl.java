@@ -7,6 +7,7 @@ import men.brakh.abiturient.model.educationDocument.EducationDocument;
 import men.brakh.abiturient.model.educationDocument.dto.EducationDocumentCreateRequest;
 import men.brakh.abiturient.model.educationDocument.dto.EducationDocumentDto;
 import men.brakh.abiturient.model.educationDocument.dto.EducationDocumentUpdateRequest;
+import men.brakh.abiturient.model.educationDocument.repository.EducationDocumentRepository;
 import men.brakh.abiturient.repository.CRUDRepository;
 import men.brakh.abiturient.service.AbstractCRUDEntityService;
 
@@ -20,12 +21,15 @@ public class EducationDocumentServiceImpl extends AbstractCRUDEntityService<
         EducationDocumentUpdateRequest,
         Integer> implements EducationDocumentService {
 
+    private final EducationDocumentRepository educationDocumentRepository;
+
 
     public EducationDocumentServiceImpl(final CRUDRepository<EducationDocument, Integer> crudRepository,
                                         final DtoMapper<EducationDocumentDto, EducationDocument> dtoMapper,
                                         final EntityPresenter<EducationDocument, EducationDocumentDto> entityPresenter,
                                         final Validator validator) {
         super(crudRepository, dtoMapper, entityPresenter, validator);
+        educationDocumentRepository = (EducationDocumentRepository) crudRepository;
     }
 
     @Override
@@ -52,5 +56,13 @@ public class EducationDocumentServiceImpl extends AbstractCRUDEntityService<
     @Override
     public EducationDocumentDto update(final Integer id, final EducationDocumentUpdateRequest updateRequest) throws BadRequestException {
         return updateTemplate.update(id, updateRequest, EducationDocumentDto.class);
+    }
+
+    @Override
+    public List<EducationDocumentDto> getByAbiturientId(final Integer id) {
+       return getTemplate.findBy(
+                () -> educationDocumentRepository.findByAbiturientId(id),
+                EducationDocumentDto.class
+        );
     }
 }

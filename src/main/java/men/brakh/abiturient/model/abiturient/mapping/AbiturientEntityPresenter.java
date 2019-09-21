@@ -5,18 +5,20 @@ import men.brakh.abiturient.model.abiturient.Abiturient;
 import men.brakh.abiturient.model.abiturient.dto.AbiturientDto;
 import org.modelmapper.ModelMapper;
 
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class AbiturientEntityPresenter implements EntityPresenter<Abiturient, AbiturientDto> {
     private final ModelMapper modelMapper;
 
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private final DateFormat dateFormat;
 
 
-    public AbiturientEntityPresenter(final ModelMapper modelMapper) {
+    public AbiturientEntityPresenter(final ModelMapper modelMapper,
+                                     final DateFormat dateFormat) {
         this.modelMapper = modelMapper;
+        this.dateFormat = dateFormat;
 
         modelMapper.typeMap(Abiturient.class, AbiturientDto.class)
                 .addMappings(mapping -> mapping.skip(AbiturientDto::setBirthDate));

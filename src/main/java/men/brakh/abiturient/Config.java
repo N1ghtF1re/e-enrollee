@@ -18,12 +18,20 @@ import men.brakh.abiturient.model.educationDocument.repository.EducationDocument
 import men.brakh.abiturient.model.educationDocument.repository.EducationDocumentRepository;
 import men.brakh.abiturient.model.educationDocument.service.EducationDocumentService;
 import men.brakh.abiturient.model.educationDocument.service.EducationDocumentServiceImpl;
+import men.brakh.abiturient.model.statement.mapping.StatementDtoMapper;
+import men.brakh.abiturient.model.statement.mapping.StatementEntityPresenter;
+import men.brakh.abiturient.model.statement.repository.StatementJsonRepository;
+import men.brakh.abiturient.model.statement.repository.StatementRepository;
+import men.brakh.abiturient.model.statement.service.StatementService;
+import men.brakh.abiturient.model.statement.service.StatementServiceImpl;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 /**
@@ -40,13 +48,15 @@ public class Config {
                   .setPropertyCondition(Conditions.isNotNull());
     }
 
+
+    private static DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     private static ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
     private static Validator validator = validatorFactory.usingContext().getValidator();
 
     /* ABITURIENT */
     private static AbiturientRepository abiturientRepository = new AbiturientJsonRepository();
-    private static AbiturientDtoMapper abiturientDtoMapper = new AbiturientDtoMapper(modelMapper);
-    private static AbiturientEntityPresenter abiturientEntityPresenter = new AbiturientEntityPresenter(modelMapper);
+    private static AbiturientDtoMapper abiturientDtoMapper = new AbiturientDtoMapper(modelMapper, dateFormat);
+    private static AbiturientEntityPresenter abiturientEntityPresenter = new AbiturientEntityPresenter(modelMapper, dateFormat);
 
 
     /* CT CERTIFICATE */
@@ -60,12 +70,18 @@ public class Config {
     private static EducationDocumentDtoMapper educationDocumentDtoMapper = new EducationDocumentDtoMapper(modelMapper, abiturientRepository);
     private static EducationDocumentEntityPresenter educationDocumentEntityPresenter = new EducationDocumentEntityPresenter(modelMapper);
 
+    /* STATEMENT */
+    private static StatementRepository statementRepository = new StatementJsonRepository(abiturientRepository, educationDocumentRepository, ctCertificateRepository);
+    private static StatementDtoMapper statementDtoMapper = new StatementDtoMapper(modelMapper, dateFormat, abiturientRepository, ctCertificateRepository, educationDocumentRepository);
+    private static StatementEntityPresenter statementEntityPresenter = new StatementEntityPresenter(modelMapper, dateFormat, ctCertificateEntityPresenter, educationDocumentEntityPresenter);
+
+
     /**
      * Abiturient Service.
      */
     public static AbiturientService abiturientService= new AbiturientServiceImpl(
             abiturientRepository, abiturientDtoMapper, abiturientEntityPresenter, validator,
-            Arrays.asList(ctCertificateRepository, educationDocumentRepository)
+            Arrays.asList(ctCertificateRepository, educationDocumentRepository, statementRepository)
     );
 
     /**
@@ -80,6 +96,13 @@ public class Config {
      */
     public static EducationDocumentService educationDocumentService = new EducationDocumentServiceImpl(
         educationDocumentRepository, educationDocumentDtoMapper, educationDocumentEntityPresenter, validator
+    );
+
+    /**
+     * Statement Service
+     */
+    public static StatementService statementService = new StatementServiceImpl(
+            statementRepository, statementDtoMapper, statementEntityPresenter, validator
     );
 
 }

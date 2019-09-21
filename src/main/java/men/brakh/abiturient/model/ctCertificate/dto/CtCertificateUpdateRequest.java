@@ -15,7 +15,7 @@ public class CtCertificateUpdateRequest extends BaseCtCertificateDto implements 
                                     final String certificateId,
                                     final String certificateNumber,
                                     final String subject,
-                                    final String year) {
+                                    final Integer year) {
         super(ctPoints, certificateId, certificateNumber, subject, year);
     }
 }

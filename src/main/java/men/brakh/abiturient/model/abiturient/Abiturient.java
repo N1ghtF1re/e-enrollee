@@ -45,4 +45,5 @@ public class Abiturient implements BaseEntity<Integer> {
     public String getFullName() {
         return firstName + " " + middleName + " " + lastName;
     }
+
 }

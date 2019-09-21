@@ -21,6 +21,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRUDRepository<T, I> {
@@ -108,7 +109,7 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
     }
 
     @Override
-    public T create(T entity) {
+    public final T create(T entity) {
         List<T> list = loadList();
 
         T copiedEntity = (T) entity.clone();
@@ -121,7 +122,7 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
     }
 
     @Override
-    public T update(T updatedEntity) throws RecourseNotFoundException {
+    public final T update(T updatedEntity) throws RecourseNotFoundException {
         List<T> entities = loadList();
 
         T copiedEntity = (T) updatedEntity.clone();
@@ -141,7 +142,7 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
     }
 
     @Override
-    public void delete(I id) {
+    public final void delete(I id) {
         List<T> entities = loadList()
                 .stream()
                 .filter(entity -> !entity.getId().equals(id))
@@ -151,7 +152,7 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
     }
 
     @Override
-    public Optional<T> findById(I id) {
+    public final Optional<T> findById(I id) {
         return loadList()
                 .stream()
                 .filter(t -> t.getId().equals(id))
@@ -160,10 +161,17 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
     }
 
     @Override
-    public List<T> findAll() {
+    public final List<T> findAll() {
         return loadList()
                 .stream()
                 .map(this::postProcessEntity)
+                .collect(Collectors.toList());
+    }
+
+    public List<T> find(final Predicate<T> filter) {
+        return findAll()
+                .stream()
+                .filter(filter)
                 .collect(Collectors.toList());
     }
 

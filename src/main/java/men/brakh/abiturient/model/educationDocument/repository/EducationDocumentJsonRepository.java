@@ -4,6 +4,8 @@ import men.brakh.abiturient.model.abiturient.repository.AbiturientRepository;
 import men.brakh.abiturient.model.educationDocument.EducationDocument;
 import men.brakh.abiturient.repository.impl.JsonCRUDRepository;
 
+import java.util.List;
+
 public class EducationDocumentJsonRepository extends JsonCRUDRepository<EducationDocument, Integer>
         implements EducationDocumentRepository  {
 
@@ -20,5 +22,11 @@ public class EducationDocumentJsonRepository extends JsonCRUDRepository<Educatio
                 entity.getAbiturient().getId()
         ).orElse(null));
         return super.postProcessEntity(entity);
+    }
+
+    @Override
+    public List<EducationDocument> findByAbiturientId(final Integer abiturientId) {
+        return find(educationDocument -> educationDocument.
+                        getAbiturient().getId().equals(abiturientId));
     }
 }

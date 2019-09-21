@@ -12,9 +12,6 @@ import men.brakh.abiturient.model.ctCertificate.dto.CtCertificateDto;
 import men.brakh.abiturient.model.ctCertificate.dto.CtCertificateUpdateRequest;
 import org.modelmapper.ModelMapper;
 
-import java.util.Arrays;
-import java.util.Optional;
-
 public class CtCertificateDtoMapper implements CreateDtoMapper<CtCertificateCreateRequest, CtCertificate>,
         UpdateDtoMapper<CtCertificateUpdateRequest, CtCertificate>,
         DtoMapper<CtCertificateDto, CtCertificate> {
@@ -68,11 +65,9 @@ public class CtCertificateDtoMapper implements CreateDtoMapper<CtCertificateCrea
                                       final CtCertificate ctCertificate) {
         String subjectName = baseCtCertificateDto.getSubject();
 
-        Optional<Subject> foundSubject = Arrays.stream(Subject.values())
-                .filter(subject -> subject.getSubjectName().equals(subjectName))
-                .findFirst();
-
-        foundSubject.ifPresent(ctCertificate::setSubject);
+        Subject subject = subjectName != null ? Subject.fromSubjectName(subjectName) : null;
+        if (subject != null)
+            ctCertificate.setSubject(subject);
 
         return ctCertificate;
     }

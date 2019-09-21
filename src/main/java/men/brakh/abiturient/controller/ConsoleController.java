@@ -3,6 +3,7 @@ package men.brakh.abiturient.controller;
 import men.brakh.abiturient.controller.impl.AbiturientConsoleCRUDController;
 import men.brakh.abiturient.controller.impl.CtCertificateConsoleCRUDController;
 import men.brakh.abiturient.controller.impl.EducationDocumentConsoleCRUDController;
+import men.brakh.abiturient.controller.impl.StatementConsoleCRUDController;
 import men.brakh.abiturient.exception.BadRequestException;
 
 import java.util.HashMap;
@@ -14,6 +15,7 @@ public class ConsoleController {
         put("abiturient", new AbiturientConsoleCRUDController());
         put("ct-certificate", new CtCertificateConsoleCRUDController());
         put("education-document", new EducationDocumentConsoleCRUDController());
+        put("statement", new StatementConsoleCRUDController());
     }};
 
     private Scanner scanner = new Scanner(System.in);
@@ -57,6 +59,9 @@ public class ConsoleController {
                 result = false;
             } catch (NumberFormatException e) {
                 System.out.println("Entered incorrect value. (Must be int)");
+                result = false;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
                 result = false;
             }
 

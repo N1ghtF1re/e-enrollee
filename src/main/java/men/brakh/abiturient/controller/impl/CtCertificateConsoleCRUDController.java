@@ -23,7 +23,7 @@ public class CtCertificateConsoleCRUDController implements ConsoleCRUDController
         put("Certificate id", CtCertificateCreateRequest.CtCertificateCreateRequestBuilder::certificateId);
         put("Certificate Number", CtCertificateCreateRequest.CtCertificateCreateRequestBuilder::certificateNumber);
         put("Ct poitns", (builder, value) -> builder.ctPoints(Integer.parseInt(value)));
-        put("Certificate year", CtCertificateCreateRequest.CtCertificateCreateRequestBuilder::year);
+        put("Certificate year",  (builder, value) -> builder.year(Integer.parseInt(value)));
         put("Subject (" + Arrays.stream(Subject.values())
                         .map(Subject::getSubjectName)
                         .collect(Collectors.joining("/")) + ")",
@@ -35,7 +35,7 @@ public class CtCertificateConsoleCRUDController implements ConsoleCRUDController
         put("Certificate id", CtCertificateUpdateRequest.CtCertificateUpdateRequestBuilder::certificateId);
         put("Certificate Number", CtCertificateUpdateRequest.CtCertificateUpdateRequestBuilder::certificateNumber);
         put("Ct poitns", (builder, value) -> builder.ctPoints(Integer.parseInt(value)));
-        put("Certificate year", CtCertificateUpdateRequest.CtCertificateUpdateRequestBuilder::year);
+        put("Certificate year",  (builder, value) -> builder.year(Integer.parseInt(value)));
         put("Subject (" + Arrays.stream(Subject.values())
                         .map(Subject::getSubjectName)
                         .collect(Collectors.joining("/")) + ")",

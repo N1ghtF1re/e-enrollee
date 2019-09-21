@@ -37,7 +37,7 @@ public class EducationDocumentDto extends BaseEducationDocumentDto implements Co
 
     @Override
     public String toString() {
-        return String.format("%d | %20s | %15s | %15s | %50s",
+        return String.format("%d | %40s | %15s | %15s | %50s",
                 id,
                 getEducationalInstitution(),
                 getDocumentType(),

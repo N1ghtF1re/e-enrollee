@@ -21,7 +21,7 @@ public class CtCertificateDto extends BaseCtCertificateDto implements Comparable
                             final String certificateNumber,
                             final String subject,
                             final Integer id,
-                            final String year,
+                            final Integer year,
                             final String abiturientName,
                             final Integer abiturientId) {
         super(ctPoints, certificateId, certificateNumber, subject, year);

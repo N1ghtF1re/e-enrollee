@@ -12,7 +12,7 @@ public class ValidationUtils {
             List<String> errors = validator.validate(entity)
                     .stream()
                     .map(violation -> "\t Field: " + violation.getPropertyPath() +
-                            ", Invalid Value: " + violation.getInvalidValue() + ", Message: " + violation.getMessage())
+                            ", Invalid Value" + ", Message: " + violation.getMessage())
                     .collect(Collectors.toList());
 
             if (errors.size() > 0) {

@@ -10,17 +10,19 @@ import men.brakh.abiturient.model.abiturient.dto.AbiturientUpdateRequest;
 import men.brakh.abiturient.model.abiturient.dto.BaseAbiturientDto;
 import org.modelmapper.ModelMapper;
 
+import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 public class AbiturientDtoMapper implements UpdateDtoMapper<AbiturientUpdateRequest, Abiturient>,
         CreateDtoMapper<AbiturientCreateRequest, Abiturient>, DtoMapper<AbiturientDto, Abiturient> {
     private final ModelMapper modelMapper;
 
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private final DateFormat dateFormat;
 
-    public AbiturientDtoMapper(final ModelMapper modelMapper) {
+    public AbiturientDtoMapper(final ModelMapper modelMapper,
+                               final DateFormat dateFormat) {
         this.modelMapper = modelMapper;
+        this.dateFormat = dateFormat;
 
 
         modelMapper.typeMap(AbiturientUpdateRequest.class, Abiturient.class).addMappings(mp -> {

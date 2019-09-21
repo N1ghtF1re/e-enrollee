@@ -4,6 +4,7 @@ import lombok.*;
 import men.brakh.abiturient.model.BaseEntity;
 import men.brakh.abiturient.model.ParentAware;
 import men.brakh.abiturient.model.abiturient.Abiturient;
+import men.brakh.abiturient.validation.NotFutureYear;
 
 import javax.validation.constraints.*;
 
@@ -31,8 +32,9 @@ public class CtCertificate implements BaseEntity<Integer>, ParentAware<Integer> 
     private Subject subject;
 
     @NotNull
-    @Size(min = 4, max = 4)
-    private String year;
+    @Min(2010)
+    @NotFutureYear
+    private Integer year;
 
     @NotNull
     private Abiturient abiturient;

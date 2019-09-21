@@ -24,7 +24,7 @@ public class AbiturientEntityPresenterTest {
                 .setAmbiguityIgnored(true)
                 .setPropertyCondition(Conditions.isNotNull());
 
-        entityPresenter = new AbiturientEntityPresenter(modelMapper);
+        entityPresenter = new AbiturientEntityPresenter(modelMapper, simpleDateFormat);
     }
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");

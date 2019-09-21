@@ -1,6 +1,9 @@
 package men.brakh.abiturient.model.ctCertificate;
 
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum Subject {
     HISTORY("History"),
     MATH("Math"),
@@ -18,5 +21,13 @@ public enum Subject {
 
     public String getSubjectName() {
         return subjectName;
+    }
+
+    public static Subject fromSubjectName(String name) {
+        Optional<Subject> foundSubject = Arrays.stream(Subject.values())
+                .filter(subject -> subject.getSubjectName().equals(name))
+                .findFirst();
+
+        return foundSubject.orElseThrow(() -> new IllegalArgumentException("There is no subject with name " + name));
     }
 }

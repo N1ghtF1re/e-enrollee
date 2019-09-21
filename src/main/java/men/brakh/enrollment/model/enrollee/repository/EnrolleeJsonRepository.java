@@ -8,4 +8,5 @@ public class EnrolleeJsonRepository extends JsonCRUDRepository<Enrollee, Integer
     public EnrolleeJsonRepository() {
         super(Enrollee.class, "enrollee", true);
     }
+
 }

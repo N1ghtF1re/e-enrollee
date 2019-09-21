@@ -15,7 +15,6 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -44,7 +43,9 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
         final Path filePath = Paths.get(dbPath + fileName + ".json");
         filePathString = filePath.toString();
 
-        gson = new GsonBuilder().setDateFormat(DateFormat.LONG).create();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        configureGson(gsonBuilder);
+        gson = gsonBuilder.create();
 
         if (!Files.exists(filePath)) {
             try {
@@ -68,10 +69,9 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
                 lastId.set(maxId);
             }
         }
-        configureGson(gson);
     }
 
-    protected void configureGson(Gson gson) {
+    protected void configureGson(GsonBuilder gson) {
 
     }
 

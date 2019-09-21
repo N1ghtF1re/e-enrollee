@@ -36,7 +36,7 @@ dependencies {
 jar {
 
     manifest {
-        attributes 'Main-Class': 'men.brakh.enrollee.App'
+        attributes 'Main-Class': 'men.brakh.enrollment.App'
     }
 
     from {

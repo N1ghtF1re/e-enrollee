@@ -1,10 +1,15 @@
 package men.brakh.enrollment.repository.impl;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import men.brakh.enrollment.exception.ResourceNotFoundException;
 import men.brakh.enrollment.jsonadapters.TimestampJsonAdapter;
 import men.brakh.enrollment.model.BaseEntity;
 import men.brakh.enrollment.repository.CRUDRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,6 +24,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRUDRepository<T, I> {
+    private final static Logger logger = LoggerFactory.getLogger(JsonCRUDRepository.class);
+
     private AtomicInteger lastId = new AtomicInteger();
 
     private static final String dbPath = "db/";
@@ -48,7 +55,9 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
             try {
                 Files.createDirectories(filePath.getParent());
                 Files.createFile(filePath);
+                logger.info(filePath + " db file was created");
             } catch (IOException e) {
+                logger.error("db file creation exception ", e);
                 throw new RuntimeException(e);
             }
             lastId.set(0);
@@ -64,6 +73,8 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
                         .orElse(0);
 
                 lastId.set(maxId);
+
+                logger.debug("Db " + fileName + " loaded. Last id: " + maxId);
             }
         }
     }
@@ -112,6 +123,7 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
 
     @Override
     public final T create(T entity) {
+        logger.debug(entity + " saved");
         List<T> list = loadList();
 
         T copiedEntity = (T) entity.clone();
@@ -125,6 +137,8 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
 
     @Override
     public final T update(T updatedEntity) throws ResourceNotFoundException {
+        logger.debug(updatedEntity + " updated");
+
         List<T> entities = loadList();
 
         T copiedEntity = (T) updatedEntity.clone();
@@ -145,6 +159,7 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
 
     @Override
     public final void delete(I id) {
+        logger.debug("Entity " + fileName + " with id " + id + " deleted");
         List<T> entities = loadList()
                 .stream()
                 .filter(entity -> !entity.getId().equals(id))

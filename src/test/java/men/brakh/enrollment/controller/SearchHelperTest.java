@@ -38,6 +38,7 @@ public class SearchHelperTest {
         private String a;
         private int b;
         private double c;
+        @Builder.Default
         private InnerClass innerClass = new InnerClass();
     }
 

@@ -9,6 +9,8 @@ import men.brakh.enrollment.model.Dto;
 import men.brakh.enrollment.repository.CRUDRepository;
 import men.brakh.enrollment.repository.CreateRepository;
 import men.brakh.enrollment.validation.utils.ValidationUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.validation.Validator;
 
@@ -22,6 +24,8 @@ public class CreateTemplate<
         T extends BaseEntity,
         R extends CreateDto,
         D extends Dto>  {
+
+    private static final Logger logger = LoggerFactory.getLogger(CreateTemplate.class);
 
     private final CreateRepository<T> repository;
     private final CreateDtoMapper<R, T> dtoMapper;
@@ -59,6 +63,7 @@ public class CreateTemplate<
         try {
             entity = repository.create(entity);
         } catch (Exception e) {
+            logger.error(entity.getClass().getSimpleName() + " " + entity.toString() + "creation error", e);
             throw new BadRequestException(e);
         }
 

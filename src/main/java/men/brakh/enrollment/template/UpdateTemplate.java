@@ -8,6 +8,8 @@ import men.brakh.enrollment.model.Dto;
 import men.brakh.enrollment.model.UpdateDto;
 import men.brakh.enrollment.repository.CRUDRepository;
 import men.brakh.enrollment.validation.utils.ValidationUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.validation.Validator;
 
@@ -23,6 +25,9 @@ public class UpdateTemplate<
         R extends UpdateDto,
         D extends Dto,
         I>  {
+
+    private static final Logger logger = LoggerFactory.getLogger(UpdateTemplate.class);
+
 
     private final CRUDRepository<T, I> repository;
     private final UpdateDtoMapper<R, T> dtoMapper;
@@ -64,6 +69,7 @@ public class UpdateTemplate<
         try {
             entity = repository.update(entity);
         } catch (Exception e) {
+            logger.error(entity.getClass().getSimpleName() + " " + entity.toString() + " updating error", e);
             throw new BadRequestException(e);
         }
 

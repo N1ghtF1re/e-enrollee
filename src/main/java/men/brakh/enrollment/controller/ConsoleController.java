@@ -76,7 +76,7 @@ public class ConsoleController {
     }
 
     public void receiveMessages() {
-        System.out.println("Hello! E-Abituerient welcomes you");
+        System.out.println("Hello! E-Enrollment welcomes you");
         while (true) {
             System.out.println("Please, select entity which you want to manipulate. Available entities: ");
             availableControllers.forEach(

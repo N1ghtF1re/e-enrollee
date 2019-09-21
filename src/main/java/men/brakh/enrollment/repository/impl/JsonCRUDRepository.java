@@ -15,10 +15,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -79,10 +76,13 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
         return lastId.incrementAndGet();
     }
 
+    private JsonArray loadJsonArray() throws FileNotFoundException {
+        return gson.fromJson(new FileReader(filePathString), JsonArray.class);
+    }
 
     private List<T> loadList()  {
         try {
-            JsonArray list = gson.fromJson(new FileReader(filePathString), JsonArray.class);
+            JsonArray list = loadJsonArray();
 
             if (list == null) {
                 return new ArrayList<>();
@@ -174,6 +174,7 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
                 .filter(filter)
                 .collect(Collectors.toList());
     }
+
 
     /**
      * Entity post processing.

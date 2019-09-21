@@ -2,12 +2,13 @@ package men.brakh.enrollment.controller.impl;
 
 import men.brakh.enrollment.Config;
 import men.brakh.enrollment.controller.ConsoleCRUDController;
+import men.brakh.enrollment.controller.SearchController;
 import men.brakh.enrollment.exception.BadRequestException;
-import men.brakh.enrollment.model.enrollee.service.EnrolleeService;
 import men.brakh.enrollment.model.ctCertificate.dto.CtCertificateDto;
 import men.brakh.enrollment.model.ctCertificate.service.CtCertificateService;
 import men.brakh.enrollment.model.educationDocument.dto.EducationDocumentDto;
 import men.brakh.enrollment.model.educationDocument.service.EducationDocumentService;
+import men.brakh.enrollment.model.enrollee.service.EnrolleeService;
 import men.brakh.enrollment.model.specialty.Specialty;
 import men.brakh.enrollment.model.universityApplication.UniversityApplicationType;
 import men.brakh.enrollment.model.universityApplication.dto.UniversityApplicationCreateRequest;
@@ -27,6 +28,10 @@ public class UniversityApplicationConsoleCRUDController implements ConsoleCRUDCo
     private final EnrolleeService enrolleeService = Config.enrolleeService;
     private final CtCertificateService ctCertificateService = Config.ctCertificateService;
     private final EducationDocumentService educationDocumentService = Config.educationDocumentService;
+
+    private SearchController<UniversityApplicationDto> searchController = new SearchController<>(
+            universityApplicationService, UniversityApplicationDto.class
+    );
 
 
     private int getIntId() throws BadRequestException {
@@ -150,5 +155,10 @@ public class UniversityApplicationConsoleCRUDController implements ConsoleCRUDCo
         int id = getIntId();
 
         universityApplicationService.delete(id);
+    }
+
+    @Override
+    public void search() throws BadRequestException {
+        searchController.search();
     }
 }

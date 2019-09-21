@@ -2,6 +2,7 @@ package men.brakh.enrollment.controller.impl;
 
 import men.brakh.enrollment.Config;
 import men.brakh.enrollment.controller.ConsoleCRUDController;
+import men.brakh.enrollment.controller.SearchController;
 import men.brakh.enrollment.exception.BadRequestException;
 import men.brakh.enrollment.model.ctCertificate.Subject;
 import men.brakh.enrollment.model.ctCertificate.dto.CtCertificateCreateRequest;
@@ -16,6 +17,10 @@ import java.util.stream.Collectors;
 public class CtCertificateConsoleCRUDController implements ConsoleCRUDController {
     private Scanner scanner = new Scanner(System.in);
     private CtCertificateService ctCertificateService = Config.ctCertificateService;
+    private SearchController<CtCertificateDto> searchController = new SearchController<>(
+            ctCertificateService,
+            CtCertificateDto.class
+    );
 
     private Map<String, BiConsumer<CtCertificateCreateRequest.CtCertificateCreateRequestBuilder, String>> createFieldsMap
             = new LinkedHashMap<String, BiConsumer<CtCertificateCreateRequest.CtCertificateCreateRequestBuilder, String>>() {{
@@ -117,4 +122,11 @@ public class CtCertificateConsoleCRUDController implements ConsoleCRUDController
 
         ctCertificateService.delete(id);
     }
+
+    @Override
+    public void search() throws BadRequestException {
+        searchController.search();
+    }
+
+
 }

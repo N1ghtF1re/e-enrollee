@@ -2,6 +2,7 @@ package men.brakh.enrollment.controller.impl;
 
 import men.brakh.enrollment.Config;
 import men.brakh.enrollment.controller.ConsoleCRUDController;
+import men.brakh.enrollment.controller.SearchController;
 import men.brakh.enrollment.exception.BadRequestException;
 import men.brakh.enrollment.model.educationDocument.dto.EducationDocumentCreateRequest;
 import men.brakh.enrollment.model.educationDocument.dto.EducationDocumentDto;
@@ -14,6 +15,10 @@ import java.util.function.BiConsumer;
 public class EducationDocumentConsoleCRUDController implements ConsoleCRUDController {
     private Scanner scanner = new Scanner(System.in);
     private EducationDocumentService educationDocumentService = Config.educationDocumentService;
+
+    private SearchController<EducationDocumentDto> searchController = new SearchController<>(
+            educationDocumentService, EducationDocumentDto.class
+    );
 
     private Map<String, BiConsumer<EducationDocumentCreateRequest.EducationDocumentCreateRequestBuilder, String>> createFieldsMap
             = new LinkedHashMap<String, BiConsumer<EducationDocumentCreateRequest.EducationDocumentCreateRequestBuilder, String>>() {{
@@ -107,5 +112,10 @@ public class EducationDocumentConsoleCRUDController implements ConsoleCRUDContro
         int id = getId();
 
         educationDocumentService.delete(id);
+    }
+
+    @Override
+    public void search() throws BadRequestException {
+        searchController.search();
     }
 }

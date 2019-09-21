@@ -24,7 +24,7 @@ public class ConsoleController {
         System.out.println("Great. And then, what do you want to do with " + enteredEntity + "?");
 
         while (true) {
-            System.out.println("- create\n- read\n- update\n- delete\n- back");
+            System.out.println("- create\n- read\n- update\n- delete\n- search\n- back");
             String mode = scanner.nextLine();
 
             boolean result;
@@ -45,6 +45,10 @@ public class ConsoleController {
                         break;
                     case "delete":
                         crudController.delete();
+                        result = true;
+                        break;
+                    case "search":
+                        crudController.search();
                         result = true;
                         break;
                     case "back":

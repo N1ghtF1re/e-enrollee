@@ -7,4 +7,5 @@ public interface ConsoleCRUDController {
     void showList();
     void update() throws BadRequestException;
     void delete() throws BadRequestException;
+    void search() throws BadRequestException;
 }

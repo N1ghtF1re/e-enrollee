@@ -1,5 +1,10 @@
 package men.brakh.enrollment.model.universityApplication.repository;
 
+import com.google.gson.GsonBuilder;
+import men.brakh.enrollment.jsonadapters.BaseEntityOnlyIntIdJsonAdapter;
+import men.brakh.enrollment.model.ctCertificate.CtCertificate;
+import men.brakh.enrollment.model.educationDocument.EducationDocument;
+import men.brakh.enrollment.model.enrollee.Enrollee;
 import men.brakh.enrollment.model.enrollee.repository.EnrolleeRepository;
 import men.brakh.enrollment.model.ctCertificate.repository.CtCertificateRepository;
 import men.brakh.enrollment.model.educationDocument.repository.EducationDocumentRepository;
@@ -24,6 +29,14 @@ public class UniversityApplicationJsonRepository extends JsonCRUDRepository<Univ
         this.enrolleeRepository = enrolleeRepository;
         this.educationDocumentRepository = educationDocumentRepository;
         this.ctCertificateRepository = ctCertificateRepository;
+    }
+
+    @Override
+    protected void configureGson(final GsonBuilder gson) {
+        super.configureGson(gson);
+        gson.registerTypeAdapter(Enrollee.class, new BaseEntityOnlyIntIdJsonAdapter<Enrollee>());
+        gson.registerTypeAdapter(EducationDocument.class, new BaseEntityOnlyIntIdJsonAdapter<EducationDocument>());
+        gson.registerTypeAdapter(CtCertificate.class, new BaseEntityOnlyIntIdJsonAdapter<CtCertificate>());
     }
 
     @Override

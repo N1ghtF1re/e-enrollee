@@ -1,5 +1,8 @@
 package men.brakh.enrollment.model.ctCertificate.repository;
 
+import com.google.gson.GsonBuilder;
+import men.brakh.enrollment.jsonadapters.BaseEntityOnlyIntIdJsonAdapter;
+import men.brakh.enrollment.model.enrollee.Enrollee;
 import men.brakh.enrollment.model.enrollee.repository.EnrolleeRepository;
 import men.brakh.enrollment.model.ctCertificate.CtCertificate;
 import men.brakh.enrollment.model.ctCertificate.Subject;
@@ -18,6 +21,12 @@ public class CtCertificateJsonRepository
         this.enrolleeRepository = enrolleeRepository;
     }
 
+    @Override
+    protected void configureGson(final GsonBuilder gson) {
+        super.configureGson(gson);
+        // Serialize only id
+        gson.registerTypeAdapter(Enrollee.class, new BaseEntityOnlyIntIdJsonAdapter<Enrollee>());
+    }
 
     @Override
     protected CtCertificate postProcessEntity(final CtCertificate entity) {

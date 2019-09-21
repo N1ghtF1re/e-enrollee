@@ -1,6 +1,6 @@
 package men.brakh.enrollment.model.educationDocument.mapping;
 
-import men.brakh.enrollment.exception.RecourseNotFoundException;
+import men.brakh.enrollment.exception.ResourceNotFoundException;
 import men.brakh.enrollment.model.enrollee.Enrollee;
 import men.brakh.enrollment.model.enrollee.repository.EnrolleeRepository;
 import men.brakh.enrollment.model.educationDocument.EducationDocument;
@@ -47,7 +47,7 @@ public class EducationDocumentDtoMapperTest {
         }
 
         @Override
-        public Enrollee update(final Enrollee entity) throws RecourseNotFoundException {
+        public Enrollee update(final Enrollee entity) throws ResourceNotFoundException {
             return null;
         }
     };

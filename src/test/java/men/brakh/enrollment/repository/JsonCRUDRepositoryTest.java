@@ -4,7 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import men.brakh.enrollment.exception.RecourseNotFoundException;
+import men.brakh.enrollment.exception.ResourceNotFoundException;
 import men.brakh.enrollment.model.BaseEntity;
 import men.brakh.enrollment.repository.impl.JsonCRUDRepository;
 import org.junit.After;
@@ -73,7 +73,7 @@ public class JsonCRUDRepositoryTest {
     }
 
     @Test
-    public void update() throws RecourseNotFoundException {
+    public void update() throws ResourceNotFoundException {
         TestEntity testEntity = new TestEntity();
         testEntity.setField("A");
         crudRepository.create(testEntity);

@@ -1,10 +1,8 @@
 package men.brakh.enrollment.repository.impl;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import men.brakh.enrollment.exception.RecourseNotFoundException;
+import com.google.gson.*;
+import men.brakh.enrollment.exception.ResourceNotFoundException;
+import men.brakh.enrollment.jsonadapters.TimestampJsonAdapter;
 import men.brakh.enrollment.model.BaseEntity;
 import men.brakh.enrollment.repository.CRUDRepository;
 
@@ -32,7 +30,9 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
 
     private Gson gson;
 
-    public JsonCRUDRepository(Class<T> entityClass, final String fileName, final boolean autogenerateIntId) {
+    public JsonCRUDRepository(final Class<T> entityClass,
+                              final String fileName,
+                              final boolean autogenerateIntId) {
         this.entityClass = entityClass;
         this.fileName = fileName;
         this.autogenerateIntId = autogenerateIntId;
@@ -68,8 +68,10 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
         }
     }
 
-    protected void configureGson(GsonBuilder gson) {
 
+
+    protected void configureGson(final GsonBuilder gson) {
+        gson.registerTypeAdapter(Date.class, new TimestampJsonAdapter());
     }
 
     private int generateId() {
@@ -122,7 +124,7 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
     }
 
     @Override
-    public final T update(T updatedEntity) throws RecourseNotFoundException {
+    public final T update(T updatedEntity) throws ResourceNotFoundException {
         List<T> entities = loadList();
 
         T copiedEntity = (T) updatedEntity.clone();
@@ -136,7 +138,7 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
             }
         }
 
-        if (!isUpdated) throw new RecourseNotFoundException();
+        if (!isUpdated) throw new ResourceNotFoundException();
         saveList(entities);
         return updatedEntity;
     }

@@ -60,9 +60,9 @@ public class UniversityApplicationDto implements Dto, Comparable<UniversityAppli
 
     @Override
     public String toString() {
-        return "STATEMENT #" + id
+        return "APPLICATION #" + id
                 + "\nTYPE: " + UniversityApplicationType.valueOf(type).getDescription()
-                + "\nABITURIENT: " + enrolleeName + " [" + enrolleeId + "]\n"
+                + "\nENROLLEE: " + enrolleeName + " [" + enrolleeId + "]\n"
                 + "CERTIFICATES: \n"
                 + certificates.stream().map(CtCertificateDto::toString).collect(Collectors.joining("\n"))
                 + "\nSPECIALITIES: " + String.join(", ", specialities)

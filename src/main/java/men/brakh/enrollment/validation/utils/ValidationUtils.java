@@ -1,4 +1,4 @@
-package men.brakh.enrollment.utils;
+package men.brakh.enrollment.validation.utils;
 
 import men.brakh.enrollment.exception.BadRequestException;
 

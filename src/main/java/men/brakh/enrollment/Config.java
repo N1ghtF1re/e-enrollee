@@ -70,7 +70,7 @@ public class Config {
     private static EducationDocumentDtoMapper educationDocumentDtoMapper = new EducationDocumentDtoMapper(modelMapper, enrolleeRepository);
     private static EducationDocumentEntityPresenter educationDocumentEntityPresenter = new EducationDocumentEntityPresenter(modelMapper);
 
-    /* STATEMENT */
+    /* APPLICATION */
     private static UniversityApplicationRepository universityApplicationRepository = new UniversityApplicationJsonRepository(enrolleeRepository, educationDocumentRepository, ctCertificateRepository);
     private static UniversityApplicationDtoMapper universityApplicationDtoMapper = new UniversityApplicationDtoMapper(modelMapper, dateFormat, enrolleeRepository, ctCertificateRepository, educationDocumentRepository);
     private static UniversityApplicationEntityPresenter universityApplicationEntityPresenter = new UniversityApplicationEntityPresenter(modelMapper, dateFormat, ctCertificateEntityPresenter, educationDocumentEntityPresenter);

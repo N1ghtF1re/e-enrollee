@@ -7,7 +7,7 @@ import men.brakh.enrollment.model.BaseEntity;
 import men.brakh.enrollment.model.Dto;
 import men.brakh.enrollment.model.UpdateDto;
 import men.brakh.enrollment.repository.CRUDRepository;
-import men.brakh.enrollment.utils.ValidationUtils;
+import men.brakh.enrollment.validation.utils.ValidationUtils;
 
 import javax.validation.Validator;
 

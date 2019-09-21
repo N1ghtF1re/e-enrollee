@@ -13,6 +13,8 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 @Builder
 public class CtCertificate implements BaseEntity<Integer>, ParentAware<Integer> {
+    private static final transient long serialVersionUID = 1476394463348637646L;
+
     private Integer id;
 
     @Min(0)

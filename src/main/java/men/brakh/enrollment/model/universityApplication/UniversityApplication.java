@@ -28,6 +28,8 @@ import java.util.List;
 @SubjectsInCerficiateEqualsSubjectsForSpecialities
 @SingleAbutirient
 public class UniversityApplication implements BaseEntity<Integer>, ParentAware<Integer> {
+    private static final transient long serialVersionUID = -1421742815469953132L;
+
     private Integer id;
 
     @NotNull

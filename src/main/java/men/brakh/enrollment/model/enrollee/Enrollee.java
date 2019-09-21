@@ -16,6 +16,8 @@ import java.util.Date;
 @Builder
 public class Enrollee implements BaseEntity<Integer> {
     private static final transient String NAME_REGEX = "[A-ZА-Я][a-zа-я]*";
+    private static final transient long serialVersionUID = -7547104466942600501L;
+
     private Integer id;
 
     @NotNull

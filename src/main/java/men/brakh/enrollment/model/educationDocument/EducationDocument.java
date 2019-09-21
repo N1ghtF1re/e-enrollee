@@ -17,6 +17,8 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Builder
 public class EducationDocument implements BaseEntity<Integer>, ParentAware<Integer> {
+    private static final transient long serialVersionUID = 7370268272749102129L;
+
     private Integer id;
 
     @Min(0)

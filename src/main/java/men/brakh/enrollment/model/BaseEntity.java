@@ -1,6 +1,8 @@
 package men.brakh.enrollment.model;
 
-public interface BaseEntity<T> extends Cloneable {
+import java.io.Serializable;
+
+public interface BaseEntity<T> extends Cloneable, Serializable {
     T getId();
     void setId(T id);
 

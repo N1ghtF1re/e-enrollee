@@ -8,6 +8,7 @@ import men.brakh.enrollment.model.BaseEntity;
 import men.brakh.enrollment.model.ParentAware;
 import men.brakh.enrollment.model.enrollee.Enrollee;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -24,6 +25,7 @@ public class EducationDocument implements BaseEntity<Integer>, ParentAware<Integ
     @Min(0)
     @Max(10)
     @NotNull
+    @Digits(integer = 2,fraction = 1)
     private Double averageGrade;
 
     @NotNull

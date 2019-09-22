@@ -32,7 +32,7 @@ public class CtCertificateDto extends BaseCtCertificateDto implements Comparable
 
     @Override
     public String toString() {
-        return String.format("%d | %50s | %s | %s | %15s | %d / 100 | %s year",
+        return String.format("%d | %-50s | %s | %s | %-20s | %d / 100 | %s year",
                 id,
                 getEnrolleeName(),
                 getCertificateIdentifier(),

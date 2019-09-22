@@ -25,7 +25,7 @@ public class EnrolleeDto extends BaseEnrolleeDto implements Comparable<EnrolleeD
 
     @Override
     public String toString() {
-        return String.format("%d | %15s | %15s | %15s | %s",
+        return String.format("%d | %-20s | %-20s | %-20s | %s",
                 id,
                 getFirstName(),
                 getLastName(),

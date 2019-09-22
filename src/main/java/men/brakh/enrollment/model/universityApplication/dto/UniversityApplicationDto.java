@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import men.brakh.enrollment.model.Dto;
+import men.brakh.enrollment.model.ctCertificate.dto.BaseCtCertificateDto;
 import men.brakh.enrollment.model.ctCertificate.dto.CtCertificateDto;
 import men.brakh.enrollment.model.educationDocument.dto.EducationDocumentDto;
 import men.brakh.enrollment.model.universityApplication.UniversityApplicationType;
@@ -60,10 +61,18 @@ public class UniversityApplicationDto implements Dto, Comparable<UniversityAppli
 
     @Override
     public String toString() {
+        final int ctTotalPoints = certificates.stream()
+                .map(BaseCtCertificateDto::getCtPoints)
+                .mapToInt(Integer::intValue)
+                .sum();
+
+        final int totalPoints = (int) Math.round(ctTotalPoints + educationDocument.getAverageGrade() * 10);
+
         return "APPLICATION #" + id
                 + "\nTYPE: " + UniversityApplicationType.valueOf(type).getDescription()
                 + "\nENROLLEE: " + enrolleeName + " [" + enrolleeId + "]\n"
-                + "CERTIFICATES: \n"
+                + "\nTOTAL POINTS: " + totalPoints
+                + "\nCERTIFICATES: \n"
                 + certificates.stream().map(CtCertificateDto::toString).collect(Collectors.joining("\n"))
                 + "\nSPECIALITIES: " + String.join(", ", specialities)
                 + "\nEDUCATION DOCUMENT: \n" + educationDocument

@@ -37,11 +37,12 @@ public class EducationDocumentDto extends BaseEducationDocumentDto implements Co
 
     @Override
     public String toString() {
-        return String.format("%d | %40s | %15s | %15s | %50s",
+        return String.format("%d | %-40s | %-20s | %-20s | %.1f / 10 | %-50s",
                 id,
                 getEducationalInstitution(),
                 getDocumentType(),
                 getDocumentUniqueNumber(),
+                getAverageGrade(),
                 getEnrolleeName());
     }
 }

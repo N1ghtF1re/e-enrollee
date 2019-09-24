@@ -58,7 +58,8 @@ public class EnrolleeDtoMapper implements UpdateDtoMapper<EnrolleeUpdateRequest,
 
     private Enrollee baseMapping(final Enrollee enrollee, final BaseEnrolleeDto dto) {
         try {
-            enrollee.setBirthDate(dateFormat.parse((String) dto.getBirthDate()));
+            if (dto.getBirthDate() != null)
+                enrollee.setBirthDate(dateFormat.parse((String) dto.getBirthDate()));
         } catch (ParseException e) {
             enrollee.setBirthDate(null);
         }

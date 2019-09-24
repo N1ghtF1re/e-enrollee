@@ -4,7 +4,7 @@ The program created as part of the laboratory work on the subject of "Web techno
 The program is a system of electronic submission of applications to the university.
 
 ## Technologies 
-Project created using Java, Gson Library, Javax Validation and some another libs
+Project created using Java, Gson Library, ModelMapper, Javax Validation and some another libs
 
 ## Run 
 To run the application, you need to build it 

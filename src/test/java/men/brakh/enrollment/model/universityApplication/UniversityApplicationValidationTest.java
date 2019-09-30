@@ -67,7 +67,7 @@ public class UniversityApplicationValidationTest {
                         ctCertificate(Subject.BELORUSSIAN_LANG)
                 ))
                 .educationDocument(educationDocument())
-                .type(UniversityApplicationType.FREE_EDUCATIONS_APPLICATION)
+                .type(EducationType.FREE_EDUCATION)
                 .date(new Date())
                 .enrollee(enrollee())
                 .build();
@@ -86,7 +86,7 @@ public class UniversityApplicationValidationTest {
                         ctCertificate(Subject.BELORUSSIAN_LANG)
                 ))
                 .educationDocument(educationDocument())
-                .type(UniversityApplicationType.FREE_EDUCATIONS_APPLICATION)
+                .type(EducationType.FREE_EDUCATION)
                 .date(new Date())
                 .enrollee(enrollee())
                 .build();

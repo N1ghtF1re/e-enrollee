@@ -8,7 +8,7 @@ import men.brakh.enrollment.model.Dto;
 import men.brakh.enrollment.model.ctCertificate.dto.BaseCtCertificateDto;
 import men.brakh.enrollment.model.ctCertificate.dto.CtCertificateDto;
 import men.brakh.enrollment.model.educationDocument.dto.EducationDocumentDto;
-import men.brakh.enrollment.model.universityApplication.UniversityApplicationType;
+import men.brakh.enrollment.model.universityApplication.EducationType;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -69,7 +69,7 @@ public class UniversityApplicationDto implements Dto, Comparable<UniversityAppli
         final int totalPoints = (int) Math.round(ctTotalPoints + educationDocument.getAverageGrade() * 10);
 
         return "APPLICATION #" + id
-                + "\nTYPE: " + UniversityApplicationType.valueOf(type).getDescription()
+                + "\nTYPE: " + EducationType.valueOf(type).getDescription()
                 + "\nENROLLEE: " + enrolleeName + " [" + enrolleeId + "]\n"
                 + "\nTOTAL POINTS: " + totalPoints
                 + "\nCERTIFICATES: \n"

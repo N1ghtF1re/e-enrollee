@@ -10,7 +10,7 @@ import men.brakh.enrollment.model.educationDocument.dto.EducationDocumentDto;
 import men.brakh.enrollment.model.educationDocument.service.EducationDocumentService;
 import men.brakh.enrollment.model.enrollee.service.EnrolleeService;
 import men.brakh.enrollment.model.specialty.Specialty;
-import men.brakh.enrollment.model.universityApplication.UniversityApplicationType;
+import men.brakh.enrollment.model.universityApplication.EducationType;
 import men.brakh.enrollment.model.universityApplication.dto.UniversityApplicationCreateRequest;
 import men.brakh.enrollment.model.universityApplication.dto.UniversityApplicationDto;
 import men.brakh.enrollment.model.universityApplication.dto.UniversityApplicationUpdateRequest;
@@ -85,7 +85,7 @@ public class UniversityApplicationConsoleCRUDController implements ConsoleCRUDCo
     private String getApplicationType() throws BadRequestException {
         System.out.println("Please, select application type: (And enter number of type)");
 
-        UniversityApplicationType[] types = UniversityApplicationType.values();
+        EducationType[] types = EducationType.values();
 
         for (int i = 0; i < types.length; i++) {
             System.out.println((i+1) + " - " + types[i].getDescription());

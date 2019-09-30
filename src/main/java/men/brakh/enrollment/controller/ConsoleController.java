@@ -1,10 +1,12 @@
 package men.brakh.enrollment.controller;
 
-import men.brakh.enrollment.controller.impl.EnrolleeConsoleCRUDController;
+import men.brakh.enrollment.Config;
 import men.brakh.enrollment.controller.impl.CtCertificateConsoleCRUDController;
 import men.brakh.enrollment.controller.impl.EducationDocumentConsoleCRUDController;
+import men.brakh.enrollment.controller.impl.EnrolleeConsoleCRUDController;
 import men.brakh.enrollment.controller.impl.UniversityApplicationConsoleCRUDController;
 import men.brakh.enrollment.exception.BadRequestException;
+import men.brakh.enrollment.model.interimLists.service.InterimListsService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +21,8 @@ public class ConsoleController {
     }};
 
     private Scanner scanner = new Scanner(System.in);
+
+    private InterimListsService interimListsService = Config.interimListsService;
 
     private void selectMode(String enteredEntity, ConsoleCRUDController crudController) {
         System.out.println("Great. And then, what do you want to do with " + enteredEntity + "?");
@@ -75,6 +79,10 @@ public class ConsoleController {
         }
     }
 
+    private void showInterimList() {
+        System.out.println(interimListsService.getList());
+    }
+
     public void receiveMessages() {
         System.out.println("Hello! E-Enrollment welcomes you");
         while (true) {
@@ -82,12 +90,18 @@ public class ConsoleController {
             availableControllers.forEach(
                     (entityName, controller) -> System.out.println(" - " + entityName)
             );
+            System.out.println(" - interim-list");
+
 
             System.out.println("\nTo exit, enter 'exit'\n");
 
             final String enteredEntity = scanner.nextLine();
 
             if (enteredEntity.toLowerCase().equals("exit")) break;
+            if (enteredEntity.toLowerCase().equals("interim-list")) {
+                showInterimList();
+                continue;
+            }
 
             ConsoleCRUDController crudController = availableControllers.get(enteredEntity.toLowerCase());
 

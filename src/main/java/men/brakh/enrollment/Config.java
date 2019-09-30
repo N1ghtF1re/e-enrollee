@@ -18,6 +18,8 @@ import men.brakh.enrollment.model.educationDocument.repository.EducationDocument
 import men.brakh.enrollment.model.educationDocument.repository.EducationDocumentRepository;
 import men.brakh.enrollment.model.educationDocument.service.EducationDocumentService;
 import men.brakh.enrollment.model.educationDocument.service.EducationDocumentServiceImpl;
+import men.brakh.enrollment.model.interimLists.service.InterimListsService;
+import men.brakh.enrollment.model.interimLists.service.InterimListsServiceImpl;
 import men.brakh.enrollment.model.universityApplication.mapping.UniversityApplicationDtoMapper;
 import men.brakh.enrollment.model.universityApplication.mapping.UniversityApplicationEntityPresenter;
 import men.brakh.enrollment.model.universityApplication.repository.UniversityApplicationJsonRepository;
@@ -105,4 +107,9 @@ public class Config {
             universityApplicationRepository, universityApplicationDtoMapper, universityApplicationEntityPresenter, validator
     );
 
+    /**
+     * Interim service
+     */
+    public static InterimListsService interimListsService = new InterimListsServiceImpl(enrolleeEntityPresenter,
+            universityApplicationRepository);
 }

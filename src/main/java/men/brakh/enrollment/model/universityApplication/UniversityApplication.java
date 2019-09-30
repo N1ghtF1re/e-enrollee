@@ -53,7 +53,7 @@ public class UniversityApplication implements BaseEntity<Integer>, ParentAware<I
     private Date date;
 
     @NotNull
-    private UniversityApplicationType type;
+    private EducationType type;
 
     @Override
     public UniversityApplication clone() {
@@ -67,5 +67,10 @@ public class UniversityApplication implements BaseEntity<Integer>, ParentAware<I
     @Override
     public Integer getParentId() {
         return enrollee == null ? null : enrollee.getId();
+    }
+
+    public int getScores() {
+        return (int) (certificates.stream().map(CtCertificate::getCtPoints).mapToInt(Integer::intValue).sum()
+                        + Math.round(educationDocument.getAverageGrade() * 10));
     }
 }

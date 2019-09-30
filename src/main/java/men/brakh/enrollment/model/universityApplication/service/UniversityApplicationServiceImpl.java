@@ -4,7 +4,7 @@ import men.brakh.enrollment.exception.BadRequestException;
 import men.brakh.enrollment.mapping.mapper.DtoMapper;
 import men.brakh.enrollment.mapping.presenter.EntityPresenter;
 import men.brakh.enrollment.model.universityApplication.UniversityApplication;
-import men.brakh.enrollment.model.universityApplication.UniversityApplicationType;
+import men.brakh.enrollment.model.universityApplication.EducationType;
 import men.brakh.enrollment.model.universityApplication.dto.UniversityApplicationCreateRequest;
 import men.brakh.enrollment.model.universityApplication.dto.UniversityApplicationDto;
 import men.brakh.enrollment.model.universityApplication.dto.UniversityApplicationUpdateRequest;
@@ -34,9 +34,9 @@ public class UniversityApplicationServiceImpl extends AbstractCRUDEntityService<
     }
 
     private void thowIfEnrolleeAlreadyHasUniversityApplication(final Integer enrolleeType, String type) throws BadRequestException {
-        UniversityApplicationType universityApplicationType = UniversityApplicationType.valueOf(type);
+        EducationType educationType = EducationType.valueOf(type);
         List<UniversityApplication> applications =
-                universityApplicationRepository.findByEnrolleeIdAndType(enrolleeType, universityApplicationType);
+                universityApplicationRepository.findByEnrolleeIdAndType(enrolleeType, educationType);
 
         if (applications.size() > 0) {
             throw new BadRequestException("Enrollee can't have more than one university application of the same type. "

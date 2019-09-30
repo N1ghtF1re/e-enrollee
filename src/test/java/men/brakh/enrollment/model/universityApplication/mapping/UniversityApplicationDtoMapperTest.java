@@ -12,7 +12,7 @@ import men.brakh.enrollment.model.educationDocument.dto.EducationDocumentDto;
 import men.brakh.enrollment.model.educationDocument.repository.EducationDocumentRepository;
 import men.brakh.enrollment.model.specialty.Specialty;
 import men.brakh.enrollment.model.universityApplication.UniversityApplication;
-import men.brakh.enrollment.model.universityApplication.UniversityApplicationType;
+import men.brakh.enrollment.model.universityApplication.EducationType;
 import men.brakh.enrollment.model.universityApplication.dto.UniversityApplicationCreateRequest;
 import men.brakh.enrollment.model.universityApplication.dto.UniversityApplicationDto;
 import men.brakh.enrollment.model.universityApplication.dto.UniversityApplicationUpdateRequest;
@@ -142,7 +142,7 @@ public class UniversityApplicationDtoMapperTest {
                 .educationDocument(educationDocumentDto)
                 .specialities(Arrays.asList("EEB", "POIT"))
                 .date("10.10.2010")
-                .type(UniversityApplicationType.PAID_EDUCATIONS_APPLICATION.toString())
+                .type(EducationType.PAID_EDUCATION.toString())
                 .build();
 
         UniversityApplication universityApplication = UniversityApplication.builder()
@@ -150,7 +150,7 @@ public class UniversityApplicationDtoMapperTest {
                 .certificates(Collections.singletonList(ctCertificate))
                 .educationDocument(educationDocument)
                 .specialties(Arrays.asList(Specialty.EEB, Specialty.POIT))
-                .type(UniversityApplicationType.PAID_EDUCATIONS_APPLICATION)
+                .type(EducationType.PAID_EDUCATION)
                 .date(simpleDateFormat.parse("10.10.2010"))
                 .build();
 
@@ -164,7 +164,7 @@ public class UniversityApplicationDtoMapperTest {
                 .certificateIdsList(Collections.singletonList(1))
                 .educationDocumentId(1)
                 .specialities(Arrays.asList("EEB", "POIT"))
-                .type(UniversityApplicationType.FREE_EDUCATIONS_APPLICATION.toString())
+                .type(EducationType.FREE_EDUCATION.toString())
                 .build();
 
         UniversityApplication created = universityApplicationDtoMapper.mapToEntity(universityApplicationCreateRequest);
@@ -173,7 +173,7 @@ public class UniversityApplicationDtoMapperTest {
                 .enrollee(enrollee)
                 .certificates(Collections.singletonList(ctCertificate))
                 .educationDocument(educationDocument)
-                .type(UniversityApplicationType.FREE_EDUCATIONS_APPLICATION)
+                .type(EducationType.FREE_EDUCATION)
                 .specialties(Arrays.asList(Specialty.EEB, Specialty.POIT))
                 .date(created.getDate())
                 .build();

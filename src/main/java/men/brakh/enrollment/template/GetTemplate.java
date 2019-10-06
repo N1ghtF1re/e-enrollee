@@ -28,9 +28,17 @@ public class GetTemplate<T extends BaseEntity,
         return (D) presenter.mapToDto(entity, dtoClass);
     }
 
+    private boolean isComparable(Class<D> dtoClass) {
+        return Comparable.class.isAssignableFrom(dtoClass);
+    }
+
     public List<D> getAll(final Class<D> dtoClass) {
         List<T> entities = repository.findAll();
-        return presenter.mapListToDto(entities, dtoClass);
+        List<D> dtos = presenter.mapListToDto(entities, dtoClass);
+        if (isComparable(dtoClass) && dtos.size() > 1) {
+            dtos.sort((o1, o2) -> ((Comparable) o1).compareTo(o2));
+        }
+        return dtos;
     }
 
     public List<D> findBy(final Supplier<List<T>> repositoryFunctionLambda,

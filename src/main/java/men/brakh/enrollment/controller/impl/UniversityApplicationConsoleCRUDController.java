@@ -129,9 +129,7 @@ public class UniversityApplicationConsoleCRUDController implements ConsoleCRUDCo
 
         }
 
-        list.stream()
-                .sorted()
-                .forEach(dto -> System.out.println(dto.toString() + "\n\n"));
+        list.forEach(dto -> System.out.println(dto.toString() + "\n\n"));
     }
 
     @Override

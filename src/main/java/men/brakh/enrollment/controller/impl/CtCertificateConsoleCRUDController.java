@@ -84,9 +84,7 @@ public class CtCertificateConsoleCRUDController implements ConsoleCRUDController
 
         }
 
-        list.stream()
-                .sorted()
-                .forEach(dto -> System.out.println(dto.toString()));
+        list.forEach(dto -> System.out.println(dto.toString()));
         System.out.println("\n");
     }
 

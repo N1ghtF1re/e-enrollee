@@ -66,9 +66,7 @@ public class EnrolleeConsoleCRUDController implements ConsoleCRUDController {
             System.out.println("There is not data :C");
         }
 
-        list.stream()
-                .sorted()
-                .forEach(enrolleeDto -> System.out.println(enrolleeDto.toString()));
+        list.forEach(enrolleeDto -> System.out.println(enrolleeDto.toString()));
         System.out.println("\n");
     }
 

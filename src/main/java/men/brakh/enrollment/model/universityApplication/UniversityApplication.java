@@ -11,7 +11,7 @@ import men.brakh.enrollment.model.ctCertificate.CtCertificate;
 import men.brakh.enrollment.model.educationDocument.EducationDocument;
 import men.brakh.enrollment.model.specialty.Specialty;
 import men.brakh.enrollment.validation.OnlyInRecentYears;
-import men.brakh.enrollment.validation.SingleAbutirient;
+import men.brakh.enrollment.validation.SingleEnrollee;
 import men.brakh.enrollment.validation.SubjectsInCerficiateEqualsSubjectsForSpecialities;
 
 import javax.validation.Valid;
@@ -26,7 +26,7 @@ import java.util.List;
 @Builder
 
 @SubjectsInCerficiateEqualsSubjectsForSpecialities
-@SingleAbutirient
+@SingleEnrollee
 public class UniversityApplication implements BaseEntity<Integer>, ParentAware<Integer> {
     private static final transient long serialVersionUID = -1421742815469953132L;
 

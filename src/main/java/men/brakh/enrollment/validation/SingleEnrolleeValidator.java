@@ -7,7 +7,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class SingleEnrolleeValidator implements ConstraintValidator<
-        SingleAbutirient, UniversityApplication> {
+        SingleEnrollee, UniversityApplication> {
     @Override
     public boolean isValid(final UniversityApplication universityApplication, final ConstraintValidatorContext context) {
         Enrollee enrollee = universityApplication.getEnrollee();

@@ -23,6 +23,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * Abstract JSON CRUD Repository.
+ * @param <T> Entity Type
+ * @param <I> Identifier's type
+ */
 public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRUDRepository<T, I> {
     private final static Logger logger = LoggerFactory.getLogger(JsonCRUDRepository.class);
 
@@ -121,6 +126,9 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
         }
     }
 
+    /**
+     * Save entity to json file
+     */
     @Override
     public final T create(T entity) {
         logger.debug(entity + " saved");
@@ -135,6 +143,12 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
         return copiedEntity;
     }
 
+    /**
+     * Update entity in json file.
+     * @param updatedEntity New entity.
+     * @return updated entity.
+     * @throws ResourceNotFoundException if there is no entity which you can update.
+     */
     @Override
     public final T update(T updatedEntity) throws ResourceNotFoundException {
         logger.debug(updatedEntity + " updated");
@@ -157,6 +171,10 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
         return updatedEntity;
     }
 
+    /**
+     * Delete entity by id.
+     * @param id id
+     */
     @Override
     public final void delete(I id) {
         logger.debug("Entity " + fileName + " with id " + id + " deleted");
@@ -168,6 +186,11 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
         saveList(entities);
     }
 
+    /**
+     * Find entity by id.
+     * @param id id
+     * @return optional of entity
+     */
     @Override
     public final Optional<T> findById(I id) {
         return loadList()
@@ -177,6 +200,10 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
                 .findFirst();
     }
 
+    /**
+     * Find all entities in repository
+     * @return list of all entities.
+     */
     @Override
     public final List<T> findAll() {
         return loadList()
@@ -185,6 +212,11 @@ public abstract class JsonCRUDRepository<T extends BaseEntity, I> implements CRU
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Find all and filter.
+     * @param filter filter-function
+     * @return filtered list
+     */
     public List<T> find(final Predicate<T> filter) {
         return findAll()
                 .stream()

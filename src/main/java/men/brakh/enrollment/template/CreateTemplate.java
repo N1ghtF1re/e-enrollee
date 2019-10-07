@@ -32,6 +32,13 @@ public class CreateTemplate<
     private final EntityPresenter<T, D> entityPresenter;
     private Validator validator;
 
+    /**
+     * Constructor.
+     * @param repository repository for entity
+     * @param dtoMapper DTO Mapper for entity
+     * @param entityPresenter Entity presenter for entity
+     * @param validator validator
+     */
     public CreateTemplate(final CreateRepository<T> repository,
                           final CreateDtoMapper<R, T> dtoMapper,
                           final EntityPresenter<T, D> entityPresenter,
@@ -42,6 +49,13 @@ public class CreateTemplate<
         this.validator = validator;
     }
 
+
+    /**
+     * Constructor without validator. Entities won't be validated before saving.
+     * @param repository repository for entity
+     * @param dtoMapper DTO Mapper for entity
+     * @param entityPresenter Entity presenter for entity
+     */
     public CreateTemplate(final CRUDRepository<T, ?> repository,
                           final CreateDtoMapper<R, T> dtoMapper,
                           final EntityPresenter<T, D> entityPresenter) {
@@ -49,14 +63,31 @@ public class CreateTemplate<
     }
 
 
+    /**
+     * Before saving hook.
+     * @param entity entity
+     * @param request request
+     * @throws BadRequestException if something went wrong
+     */
     protected void beforeSaving(T entity, R request) throws BadRequestException {
         ValidationUtils.validateAndThowIfInvalid(validator, entity);
     }
 
+    /**
+     * After saving hook.
+     * @param entity saved entity.
+     */
     protected void afterSaving(T entity) {
 
     }
 
+    /**
+     * Save entity in db and return mepped to dto
+     * @param request creation request
+     * @param dtoClass class of dto which need to return
+     * @return dto
+     * @throws BadRequestException if something went wrong.
+     */
     public D save(R request, Class<? extends D> dtoClass) throws BadRequestException {
         T entity = dtoMapper.mapToEntity(request);
         beforeSaving(entity, request);

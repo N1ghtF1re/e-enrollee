@@ -34,6 +34,13 @@ public class UpdateTemplate<
     private final EntityPresenter<T, D> entityPresenter;
     private Validator validator;
 
+    /**
+     * Constructor.
+     * @param repository repository for entity
+     * @param dtoMapper DTO Mapper for entity
+     * @param entityPresenter Entity presenter for entity
+     * @param validator validator
+     */
     public UpdateTemplate(final CRUDRepository<T, I> repository,
                           final UpdateDtoMapper<R, T> dtoMapper,
                           final EntityPresenter<T, D> entityPresenter,
@@ -44,6 +51,12 @@ public class UpdateTemplate<
         this.validator = validator;
     }
 
+    /**
+     * Constructor without validator. Entities won't be validated before updating.
+     * @param repository repository for entity
+     * @param dtoMapper DTO Mapper for entity
+     * @param entityPresenter Entity presenter for entity
+     */
     public UpdateTemplate(final CRUDRepository<T, I> repository,
                           final UpdateDtoMapper<R, T> dtoMapper,
                           final EntityPresenter<T, D> entityPresenter) {
@@ -51,14 +64,33 @@ public class UpdateTemplate<
     }
 
 
+    /**
+     * Before saving hook
+     * @param entity entity
+     * @param request request
+     * @throws BadRequestException if something went wrong
+     */
     protected void beforeSaving(T entity, R request) throws BadRequestException {
         ValidationUtils.validateAndThowIfInvalid(validator, entity);
     }
 
+    /**
+     * After saving hook
+     * @param entity entity
+     */
     protected void afterSaving(T entity) {
 
     }
 
+
+    /**
+     * Update entity by id and return updated entity mapped to dto
+     * @param id id
+     * @param request updating request
+     * @param dtoClass dto class
+     * @return updated entity mapped to dto
+     * @throws BadRequestException if something went wrong
+     */
     public D update(I id, R request, Class<? extends D> dtoClass) throws BadRequestException {
         T entity = repository.findById(id).orElseThrow(() -> new BadRequestException("Entity isn't found"));
         entity = dtoMapper.mapToEntity(entity, request);

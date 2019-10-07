@@ -6,6 +6,11 @@ import men.brakh.enrollment.repository.CRUDRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Deleting teamplte
+ * @param <T> entity type
+ * @param <I> identifier's type
+ */
 public class DeleteTemplate<
         T extends BaseEntity,
         I> {
@@ -20,14 +25,28 @@ public class DeleteTemplate<
         this.repository = repository;
     }
 
+    /**
+     * Before deleting hook
+     * @param entity entity to delete
+     */
     protected void beforeDeleting(T entity) {
 
     }
 
+
+    /**
+     * After deleting hook
+     * @param entity removed enityt.
+     */
     protected void afterDeleting(T entity) {
 
     }
 
+    /**
+     * Delete entity from db
+     * @param id id
+     * @throws BadRequestException if something went wrong.
+     */
     public void delete(I id) throws BadRequestException {
         T entity = repository.findById(id).orElseThrow(() -> new BadRequestException("Entity isn't found"));
 

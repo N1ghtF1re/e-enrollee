@@ -16,6 +16,14 @@ import men.brakh.enrollment.template.UpdateTemplate;
 
 import javax.validation.Validator;
 
+/**
+ * Abstract CRUD Service
+ * @param <T> Entity Class
+ * @param <D> Presented DTO Class
+ * @param <C> Creation Request DTO Class
+ * @param <U> Updating Request DTO Class
+ * @param <I> Identifier's type
+ */
 public abstract class AbstractCRUDEntityService<
         T extends BaseEntity,
         D extends Dto,

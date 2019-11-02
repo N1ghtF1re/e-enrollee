@@ -1,0 +1,118 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The University Application Schema",
+  "required": [
+    "id",
+    "enrollee",
+    "certificates",
+    "specialties",
+    "educationDocument",
+    "date",
+    "type"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The Id Schema",
+      "default": 0,
+      "examples": [
+        1
+      ]
+    },
+    "enrollee": {
+      "$id": "#/properties/enrollee",
+      "type": "object",
+      "title": "The Enrollee Schema",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "$id": "#/properties/enrollee/properties/id",
+          "type": "integer",
+          "title": "The Id Schema",
+          "examples": [
+            1
+          ]
+        }
+      }
+    },
+    "certificates": {
+      "$id": "#/properties/certificates",
+      "type": "array",
+      "title": "The Certificates Schema",
+      "items": {
+        "$id": "#/properties/certificates/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "$id": "#/properties/certificates/items/properties/id",
+            "type": "integer",
+            "title": "The Id Schema",
+            "examples": [
+              1
+            ]
+          }
+        }
+      }
+    },
+    "specialties": {
+      "$id": "#/properties/specialties",
+      "type": "array",
+      "title": "The Specialties Schema",
+      "items": {
+        "$id": "#/properties/specialties/items",
+        "type": "string",
+        "title": "The Items Schema",
+        "examples": [
+          "POIT"
+        ],
+        "enum": ["POIT", "IPOIT", "EEB"]
+      }
+    },
+    "educationDocument": {
+      "$id": "#/properties/educationDocument",
+      "type": "object",
+      "title": "The Education Document Schema",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "$id": "#/properties/educationDocument/properties/id",
+          "type": "integer",
+          "title": "The Id Schema",
+          "examples": [
+            1
+          ]
+        }
+      }
+    },
+    "date": {
+      "$id": "#/properties/date",
+      "type": "integer",
+      "title": "The Date Schema",
+      "default": 0,
+      "examples": [
+        1569092554
+      ]
+    },
+    "type": {
+      "$id": "#/properties/type",
+      "type": "string",
+      "title": "The Type Schema",
+      "examples": [
+        "FREE_EDUCATION"
+      ],
+      "enum": ["FREE_EDUCATION", "PAID_EDUCATION"]
+    }
+  }
+}

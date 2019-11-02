@@ -1,2 +1,3 @@
 rootProject.name = 'e-enrollment'
+include 'e-enrollment-migrator'
 

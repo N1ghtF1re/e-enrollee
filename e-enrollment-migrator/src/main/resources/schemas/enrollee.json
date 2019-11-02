@@ -1,0 +1,64 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Enrolle Schema",
+  "required": [
+    "id",
+    "firstName",
+    "lastName",
+    "middleName",
+    "birthDate"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The Id Schema",
+      "default": 0,
+      "examples": [
+        1
+      ]
+    },
+    "firstName": {
+      "$id": "#/properties/firstName",
+      "type": "string",
+      "title": "The Firstname Schema",
+      "default": "",
+      "examples": [
+        "Alexander"
+      ],
+      "pattern": "[A-ZА-Я][a-zа-я]*$"
+    },
+    "lastName": {
+      "$id": "#/properties/lastName",
+      "type": "string",
+      "title": "The Lastname Schema",
+      "default": "",
+      "examples": [
+        "Pankratiev"
+      ],
+      "pattern": "[A-ZА-Я][a-zа-я]*$"
+    },
+    "middleName": {
+      "$id": "#/properties/middleName",
+      "type": "string",
+      "title": "The Middlename Schema",
+      "default": "",
+      "examples": [
+        "Sergeevich"
+      ],
+      "pattern": "[A-ZА-Я][a-zа-я]*$"
+    },
+    "birthDate": {
+      "$id": "#/properties/birthDate",
+      "type": "integer",
+      "title": "The Birthdate Schema",
+      "default": 0,
+      "examples": [
+        966632400
+      ]
+    }
+  }
+}

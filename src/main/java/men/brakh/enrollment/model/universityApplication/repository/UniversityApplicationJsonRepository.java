@@ -25,7 +25,7 @@ public class UniversityApplicationJsonRepository extends JsonCRUDRepository<Univ
     public UniversityApplicationJsonRepository(final EnrolleeRepository enrolleeRepository,
                                    final EducationDocumentRepository educationDocumentRepository,
                                    final CtCertificateRepository ctCertificateRepository) {
-        super(UniversityApplication.class, "universityApplication", true);
+        super(UniversityApplication.class, "university_application", true);
         this.enrolleeRepository = enrolleeRepository;
         this.educationDocumentRepository = educationDocumentRepository;
         this.ctCertificateRepository = ctCertificateRepository;

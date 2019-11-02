@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group 'men.brakh'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.everit.json', name: 'org.everit.json.schema', version: '1.0.0'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+}
+
+jar {
+
+    manifest {
+        attributes 'Main-Class': 'men.brakh.migrator.Application'
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

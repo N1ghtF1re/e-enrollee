@@ -1,0 +1,89 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Ct Certificate Schema",
+  "required": [
+    "id",
+    "ctPoints",
+    "certificateIdentifier",
+    "certificateNumber",
+    "subject",
+    "year",
+    "enrollee"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The Id Schema",
+      "examples": [
+        1
+      ]
+    },
+    "ctPoints": {
+      "$id": "#/properties/ctPoints",
+      "type": "integer",
+      "title": "The Ctpoints Schema",
+      "minimum": 0,
+      "maximum": 100,
+      "examples": [
+        88
+      ]
+    },
+    "certificateIdentifier": {
+      "$id": "#/properties/certificateIdentifier",
+      "type": "string",
+      "title": "The Certificateidentifier Schema",
+      "examples": [
+        "14-521-1"
+      ],
+      "pattern": "^[0-9]{2}-[0-9]{3}-[0-9]$"
+    },
+    "certificateNumber": {
+      "$id": "#/properties/certificateNumber",
+      "type": "string",
+      "title": "The Certificatenumber Schema",
+      "examples": [
+        "1245312"
+      ],
+      "pattern": "^[0-9]{7}$"
+    },
+    "subject": {
+      "$id": "#/properties/subject",
+      "type": "string",
+      "title": "The Subject Schema",
+      "examples": [
+        "MATH"
+      ],
+      "enum": ["HISTORY", "MATH", "PHYSICS", "RUSSIAN_LANG", "BELORUSSIAN_LANG", "ENGLISH_LANG", "CHEMISTRY"]
+    },
+    "year": {
+      "$id": "#/properties/year",
+      "type": "integer",
+      "title": "The Year Schema",
+      "examples": [
+        2018
+      ]
+    },
+    "enrollee": {
+      "$id": "#/properties/enrollee",
+      "type": "object",
+      "title": "The Enrollee Schema",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "$id": "#/properties/enrollee/properties/id",
+          "type": "integer",
+          "title": "The Id Schema",
+          "examples": [
+            1
+          ]
+        }
+      }
+    }
+  }
+}

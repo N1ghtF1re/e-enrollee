@@ -5,9 +5,12 @@ import men.brakh.migrator.types.IntSqlValue;
 import men.brakh.migrator.types.SqlValue;
 import men.brakh.migrator.types.SqlValuesFactory;
 import org.everit.json.schema.Schema;
+import org.everit.json.schema.ValidationException;
 import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +20,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Migrator {
+    private static final Logger logger = LoggerFactory.getLogger(Migrator.class);
+
     private final Schema schema;
     private final JSONObject rawSchema;
     private final String dbTableName;
@@ -36,7 +41,13 @@ public class Migrator {
 
     private void validate(final JSONArray array) {
         for (int i = 0; i < array.length(); i++) {
-            schema.validate(array.getJSONObject(i));
+            try {
+                schema.validate(array.getJSONObject(i));
+            } catch (ValidationException e) {
+                logger.warn("Validation exception", e);
+                throw e;
+            }
+            logger.info("Json " + array.getJSONObject(i) + " passes validation");
         }
     }
 
@@ -80,7 +91,9 @@ public class Migrator {
 
 
         sqlRequest.append(String.join(", \n", sqlColumnsDeclarations))
-            .append(")");
+            .append("\n)");
+
+        logger.info("Executing sql query " + sqlRequest.toString());
 
         try {
             Statement statement = connection.createStatement();
@@ -116,6 +129,14 @@ public class Migrator {
                 .append(") VALUES (")
                 .append(String.join(", ", questions))
                 .append(");");
+
+            logger.info("Executing sql query " + sqlScript.toString()
+                + " with values " + sqlValues
+                                        .stream()
+                                        .map(SqlValue::getValue)
+                                        .map(Object::toString)
+                                        .collect(Collectors.joining(", ")));
+
 
             final PreparedStatement preparedStatement;
             try {
@@ -216,7 +237,12 @@ public class Migrator {
         ).findFirst();
 
         if (customMapper.isPresent()) {
-            return customMapper.get().map(sqlValue);
+            final SqlValue newValue = customMapper.get().map(sqlValue);
+
+            logger.info("Applying custom mapper. Old value: "
+                + sqlValue.getValue() + ". New value: " + newValue);
+
+            return newValue;
         } else {
             return sqlValue;
         }

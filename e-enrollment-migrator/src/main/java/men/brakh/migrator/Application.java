@@ -1,11 +1,14 @@
 package men.brakh.migrator;
 
 import men.brakh.migrator.custommapper.DateCustomMapper;
+import org.everit.json.schema.ValidationException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -45,7 +48,11 @@ public class Application {
                 new DateCustomMapper("date", "university_application")
             );
 
-            migration.migrate(new JSONArray(new String(Files.readAllBytes(jsonDbFile.toPath()))));
+            try {
+                migration.migrate(new JSONArray(new String(Files.readAllBytes(jsonDbFile.toPath()))));
+            } catch (ValidationException e) {
+                System.out.println("VALIDATION ERROR: " + e.getMessage());
+            }
 
         }
     }

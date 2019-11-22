@@ -38,7 +38,7 @@ public class CtCertificateServiceImpl extends AbstractCRUDEntityService<
 
     private void throwIfCertificateWithYearAndSubjectAlreadyExist(final Integer year, final String subjectString)
             throws BadRequestException {
-        Subject subject = Subject.fromSubjectName(subjectString);
+        Subject subject = subjectString != null ? Subject.valueOf(subjectString) : null;
         List<CtCertificate> ctCertificates = ctCertificateRepository.findByYearAndSubject(year, subject);
         if (ctCertificates.size() > 0) {
             throw new BadRequestException("You already have " + subjectString + " certificate for " + year + " year");
@@ -79,6 +79,9 @@ public class CtCertificateServiceImpl extends AbstractCRUDEntityService<
 
     @Override
     public CtCertificateDto update(final Integer id, final CtCertificateUpdateRequest updateRequest) throws BadRequestException {
+        throwIfCertificateWithYearAndSubjectAlreadyExist(updateRequest.getYear(), updateRequest.getSubject());
+        throwIfCertificateWithIdentifierAndNumberAlreadyExist(updateRequest.getCertificateIdentifier(),
+            updateRequest.getCertificateNumber());
         return updateTemplate.update(id, updateRequest, CtCertificateDto.class);
     }
 

@@ -65,7 +65,7 @@ public class CtCertificateDtoMapper implements CreateDtoMapper<CtCertificateCrea
                                       final CtCertificate ctCertificate) {
         String subjectName = baseCtCertificateDto.getSubject();
 
-        Subject subject = subjectName != null ? Subject.fromSubjectName(subjectName) : null;
+        Subject subject = subjectName != null ? Subject.valueOf(subjectName) : null;
         if (subject != null)
             ctCertificate.setSubject(subject);
 

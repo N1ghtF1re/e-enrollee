@@ -22,7 +22,6 @@ public class EnrolleeDto extends BaseEnrolleeDto implements Comparable<EnrolleeD
         this.id = id;
     }
 
-
     @Override
     public String toString() {
         return String.format("%d | %-20s | %-20s | %-20s | %s",

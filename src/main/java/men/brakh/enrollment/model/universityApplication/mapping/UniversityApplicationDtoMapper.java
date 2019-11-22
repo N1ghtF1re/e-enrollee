@@ -3,11 +3,11 @@ package men.brakh.enrollment.model.universityApplication.mapping;
 import men.brakh.enrollment.mapping.mapper.CreateDtoMapper;
 import men.brakh.enrollment.mapping.mapper.DtoMapper;
 import men.brakh.enrollment.mapping.mapper.UpdateDtoMapper;
-import men.brakh.enrollment.model.enrollee.repository.EnrolleeRepository;
 import men.brakh.enrollment.model.ctCertificate.CtCertificate;
 import men.brakh.enrollment.model.ctCertificate.dto.CtCertificateDto;
 import men.brakh.enrollment.model.ctCertificate.repository.CtCertificateRepository;
 import men.brakh.enrollment.model.educationDocument.repository.EducationDocumentRepository;
+import men.brakh.enrollment.model.enrollee.repository.EnrolleeRepository;
 import men.brakh.enrollment.model.specialty.Specialty;
 import men.brakh.enrollment.model.universityApplication.UniversityApplication;
 import men.brakh.enrollment.model.universityApplication.dto.UniversityApplicationCreateRequest;
@@ -17,6 +17,7 @@ import org.modelmapper.ModelMapper;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,7 +53,7 @@ public class UniversityApplicationDtoMapper implements DtoMapper<UniversityAppli
     }
 
     private List<CtCertificate> mapCtCertificates(List<Integer> ids) {
-        return ids
+        return ids == null ? Collections.emptyList() : ids
                 .stream()
                 .map(id -> ctCertificateRepository.findById(id).orElse(null))
                 .collect(Collectors.toList());
@@ -69,7 +70,8 @@ public class UniversityApplicationDtoMapper implements DtoMapper<UniversityAppli
         universityApplication.setEducationDocument(educationDocumentRepository.findById(createRequest.getEducationDocumentId())
                 .orElse(null));
 
-        universityApplication.setSpecialties(createRequest.getSpecialities()
+        universityApplication.setSpecialties(createRequest.getSpecialities() == null ? Collections.emptyList() :
+            createRequest.getSpecialities()
                 .stream()
                 .map(Specialty::valueOf).collect(Collectors.toList()));
 
@@ -89,7 +91,8 @@ public class UniversityApplicationDtoMapper implements DtoMapper<UniversityAppli
             .collect(Collectors.toList())));
         universityApplication.setEducationDocument(educationDocumentRepository.findById(universityApplication.getEducationDocument().getId())
                 .orElse(null));
-        universityApplication.setSpecialties(dto.getSpecialities()
+        universityApplication.setSpecialties(dto.getSpecialities() == null ? Collections.emptyList() :
+            dto.getSpecialities()
                 .stream()
                 .map(Specialty::valueOf)
                 .collect(Collectors.toList()));

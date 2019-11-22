@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'war'
 }
 
 group 'men.brakh'
@@ -7,8 +8,10 @@ version '1.0'
 
 sourceCompatibility = 1.8
 
+
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 
@@ -30,7 +33,9 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
     compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.12.1'
 
-
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
+    providedCompile group: 'javax.servlet', name: 'jsp-api', version: '2.0'
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
 
 
     annotationProcessor 'org.projectlombok:lombok:1.18.10'

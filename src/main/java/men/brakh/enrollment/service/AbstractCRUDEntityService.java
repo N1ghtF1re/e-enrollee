@@ -51,7 +51,8 @@ public abstract class AbstractCRUDEntityService<
 
         this.updateTemplate = new UpdateTemplate<>(crudRepository,
                 (UpdateDtoMapper<U, T>) dtoMapper,
-                entityPresenter);
+                entityPresenter,
+                validator);
 
         this.deleteTemplate = new DeleteTemplate<>(crudRepository);
 

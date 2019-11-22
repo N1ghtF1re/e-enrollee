@@ -54,6 +54,15 @@ public class UniversityApplicationDto implements Dto, Comparable<UniversityAppli
         this.type = type;
     }
 
+    public int getTotalPoints() {
+        final int ctTotalPoints = certificates.stream()
+            .map(BaseCtCertificateDto::getCtPoints)
+            .mapToInt(Integer::intValue)
+            .sum();
+
+        return (int) Math.round(ctTotalPoints + educationDocument.getAverageGrade() * 10);
+    }
+
     @Override
     public int compareTo(final UniversityApplicationDto universityApplicationDto) {
         return this.enrolleeName.compareTo(universityApplicationDto.enrolleeName);
@@ -61,17 +70,12 @@ public class UniversityApplicationDto implements Dto, Comparable<UniversityAppli
 
     @Override
     public String toString() {
-        final int ctTotalPoints = certificates.stream()
-                .map(BaseCtCertificateDto::getCtPoints)
-                .mapToInt(Integer::intValue)
-                .sum();
 
-        final int totalPoints = (int) Math.round(ctTotalPoints + educationDocument.getAverageGrade() * 10);
 
         return "APPLICATION #" + id
                 + "\nTYPE: " + EducationType.valueOf(type).getDescription()
                 + "\nENROLLEE: " + enrolleeName + " [" + enrolleeId + "]\n"
-                + "\nTOTAL POINTS: " + totalPoints
+                + "\nTOTAL POINTS: " + getTotalPoints()
                 + "\nCERTIFICATES: \n"
                 + certificates.stream().map(CtCertificateDto::toString).collect(Collectors.joining("\n"))
                 + "\nSPECIALITIES: " + String.join(", ", specialities)

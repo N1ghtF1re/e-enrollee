@@ -22,7 +22,7 @@ public class ValidationUtils {
             if (errors.size() > 0) {
                 logger.warn(entity.getClass().getSimpleName() + " validation error. " +
                         String.join("\n", errors));
-                throw new BadRequestException("\n" + String.join("\n", errors));
+                throw new BadRequestException(String.join("\n", errors));
             }
         }
     }

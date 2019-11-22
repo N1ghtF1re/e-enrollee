@@ -15,10 +15,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Properties;
 
 public class Application {
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Properties properties = new Properties();
 
     private static List<File> getSchemas() {
         final File folder = new File(Application.class.getResource("/schemas").getPath());
@@ -27,15 +27,16 @@ public class Application {
     }
 
     public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
-        System.out.println("Please, enter the json db basic directory");
-        final String baseDbPath = scanner.nextLine();
+        loadProperties();
+
+
         final List<File> schemas = getSchemas();
 
         for (final File schemaFile : schemas) {
             final String name = schemaFile.getName();
-            final File jsonDbFile = new File(baseDbPath + "/" + name);
+            final File jsonDbFile = new File(properties.getProperty("jsondb.path") + "/" + name);
 
-            final String dbTableName = name
+            final String dbTableName = properties.getProperty("db.prefix") + name
                 .replaceAll(".json", "")
                 .replaceAll("-", "_");
 
@@ -58,7 +59,15 @@ public class Application {
     }
 
     private static Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/enrollee","wt","123321");
+        Class.forName(properties.getProperty("db.driver"));
+        return DriverManager.getConnection(
+            properties.getProperty("db.url"),
+            properties.getProperty("db.user"),
+            properties.getProperty("db.password")
+        );
+    }
+
+    private static void loadProperties() throws IOException {
+        properties.load(Application.class.getResourceAsStream("/migration.properties"));
     }
 }

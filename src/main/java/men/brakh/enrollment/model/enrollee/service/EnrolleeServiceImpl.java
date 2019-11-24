@@ -3,7 +3,6 @@ package men.brakh.enrollment.model.enrollee.service;
 import men.brakh.enrollment.exception.BadRequestException;
 import men.brakh.enrollment.mapping.mapper.DtoMapper;
 import men.brakh.enrollment.mapping.presenter.EntityPresenter;
-import men.brakh.enrollment.model.ParentAware;
 import men.brakh.enrollment.model.enrollee.Enrollee;
 import men.brakh.enrollment.model.enrollee.dto.EnrolleeCreateRequest;
 import men.brakh.enrollment.model.enrollee.dto.EnrolleeDto;
@@ -22,15 +21,12 @@ public class EnrolleeServiceImpl extends AbstractCRUDEntityService<
         Integer
         > implements EnrolleeService {
 
-    private final List<CRUDRepository<? extends ParentAware, Integer>> childEntitiesRepositories;
 
     public EnrolleeServiceImpl(final CRUDRepository<Enrollee, Integer> crudRepository,
                                  final DtoMapper<EnrolleeDto, Enrollee> dtoMapper,
                                  final EntityPresenter<Enrollee, EnrolleeDto> entityPresenter,
-                                 final Validator validator,
-                                 final List<CRUDRepository<? extends ParentAware, Integer>> childEntitiesRepositories) {
+                                 final Validator validator) {
         super(crudRepository, dtoMapper, entityPresenter, validator);
-        this.childEntitiesRepositories = childEntitiesRepositories;
     }
 
     @Override
@@ -40,13 +36,6 @@ public class EnrolleeServiceImpl extends AbstractCRUDEntityService<
 
     @Override
     public void delete(final Integer id) throws BadRequestException {
-        childEntitiesRepositories.forEach(
-                childRepository -> childRepository.findAll()
-                        .stream()
-                        .filter(childEntity -> childEntity.getParentId().equals(id))
-                        .forEach(childEntity -> childRepository.delete((Integer) childEntity.getId()))
-        );
-
         deleteTemplate.delete(id);
 
     }

@@ -2,7 +2,7 @@ men.brakh.enrollment
 men.brakh.enrollment.controller
 men.brakh.enrollment.controller.impl
 men.brakh.enrollment.exception
-men.brakh.enrollment.jsonadapters
+men.brakh.enrollment.infrastructure.json.jsonadapters
 men.brakh.enrollment.mapping.mapper
 men.brakh.enrollment.mapping.presenter
 men.brakh.enrollment.model

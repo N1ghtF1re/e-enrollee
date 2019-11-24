@@ -1,4 +1,4 @@
-package men.brakh.enrollment.jsonadapters;
+package men.brakh.enrollment.infrastructure.json.jsonadapters;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import men.brakh.enrollment.exception.ResourceNotFoundException;
-import men.brakh.enrollment.jsonadapters.TimestampJsonAdapter;
+import men.brakh.enrollment.infrastructure.json.jsonadapters.TimestampJsonAdapter;
 import men.brakh.enrollment.model.BaseEntity;
 import men.brakh.enrollment.repository.CRUDRepository;
 import org.slf4j.Logger;

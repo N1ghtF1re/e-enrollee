@@ -1,7 +1,7 @@
 package men.brakh.enrollment.model.universityApplication.repository;
 
 import com.google.gson.GsonBuilder;
-import men.brakh.enrollment.jsonadapters.BaseEntityOnlyIntIdJsonAdapter;
+import men.brakh.enrollment.infrastructure.json.jsonadapters.BaseEntityOnlyIntIdJsonAdapter;
 import men.brakh.enrollment.model.ctCertificate.CtCertificate;
 import men.brakh.enrollment.model.educationDocument.EducationDocument;
 import men.brakh.enrollment.model.enrollee.Enrollee;

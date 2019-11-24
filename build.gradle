@@ -36,6 +36,9 @@ dependencies {
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
     providedCompile group: 'javax.servlet', name: 'jsp-api', version: '2.0'
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    compile group: 'com.zaxxer', name: 'HikariCP', version: '3.4.1'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+
 
 
     annotationProcessor 'org.projectlombok:lombok:1.18.10'

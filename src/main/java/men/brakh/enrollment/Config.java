@@ -1,31 +1,37 @@
 package men.brakh.enrollment;
 
-import men.brakh.enrollment.model.enrollee.mapping.EnrolleeDtoMapper;
-import men.brakh.enrollment.model.enrollee.mapping.EnrolleeEntityPresenter;
-import men.brakh.enrollment.model.enrollee.repository.EnrolleeJsonRepository;
-import men.brakh.enrollment.model.enrollee.repository.EnrolleeRepository;
-import men.brakh.enrollment.model.enrollee.service.EnrolleeService;
-import men.brakh.enrollment.model.enrollee.service.EnrolleeServiceImpl;
+import men.brakh.enrollment.infrastructure.jdbc.ConnectionPool;
+import men.brakh.enrollment.infrastructure.jdbc.HikariConnectionPool;
+import men.brakh.enrollment.model.ctCertificate.CtCertificate;
 import men.brakh.enrollment.model.ctCertificate.mapping.CtCertificateDtoMapper;
 import men.brakh.enrollment.model.ctCertificate.mapping.CtCertificateEntityPresenter;
-import men.brakh.enrollment.model.ctCertificate.repository.CtCertificateJsonRepository;
+import men.brakh.enrollment.model.ctCertificate.repository.CtCertificateMysqlRepository;
 import men.brakh.enrollment.model.ctCertificate.repository.CtCertificateRepository;
 import men.brakh.enrollment.model.ctCertificate.service.CtCertificateService;
 import men.brakh.enrollment.model.ctCertificate.service.CtCertificateServiceImpl;
+import men.brakh.enrollment.model.educationDocument.EducationDocument;
 import men.brakh.enrollment.model.educationDocument.mapping.EducationDocumentDtoMapper;
 import men.brakh.enrollment.model.educationDocument.mapping.EducationDocumentEntityPresenter;
-import men.brakh.enrollment.model.educationDocument.repository.EducationDocumentJsonRepository;
+import men.brakh.enrollment.model.educationDocument.repository.EducationDocumentMysqlRepository;
 import men.brakh.enrollment.model.educationDocument.repository.EducationDocumentRepository;
 import men.brakh.enrollment.model.educationDocument.service.EducationDocumentService;
 import men.brakh.enrollment.model.educationDocument.service.EducationDocumentServiceImpl;
+import men.brakh.enrollment.model.enrollee.Enrollee;
+import men.brakh.enrollment.model.enrollee.mapping.EnrolleeDtoMapper;
+import men.brakh.enrollment.model.enrollee.mapping.EnrolleeEntityPresenter;
+import men.brakh.enrollment.model.enrollee.repository.EnrolleeMysqlRepository;
+import men.brakh.enrollment.model.enrollee.repository.EnrolleeRepository;
+import men.brakh.enrollment.model.enrollee.service.EnrolleeService;
+import men.brakh.enrollment.model.enrollee.service.EnrolleeServiceImpl;
 import men.brakh.enrollment.model.interimLists.service.InterimListsService;
 import men.brakh.enrollment.model.interimLists.service.InterimListsServiceImpl;
 import men.brakh.enrollment.model.universityApplication.mapping.UniversityApplicationDtoMapper;
 import men.brakh.enrollment.model.universityApplication.mapping.UniversityApplicationEntityPresenter;
-import men.brakh.enrollment.model.universityApplication.repository.UniversityApplicationJsonRepository;
+import men.brakh.enrollment.model.universityApplication.repository.UniversityApplicationMysqlRepository;
 import men.brakh.enrollment.model.universityApplication.repository.UniversityApplicationRepository;
 import men.brakh.enrollment.model.universityApplication.service.UniversityApplicationService;
 import men.brakh.enrollment.model.universityApplication.service.UniversityApplicationServiceImpl;
+import men.brakh.enrollment.repository.impl.MysqlCRUDRepository;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 
@@ -34,11 +40,11 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 
 /**
  * Crutch Dependency Injection.
  */
+@SuppressWarnings("unchecked")
 public class Config {
     private static ModelMapper modelMapper;
 
@@ -55,25 +61,38 @@ public class Config {
     private static ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
     private static Validator validator = validatorFactory.usingContext().getValidator();
 
-    /* ABITURIENT */
-    private static EnrolleeRepository enrolleeRepository = new EnrolleeJsonRepository();
+    private static ConnectionPool connectionPool = new HikariConnectionPool();
+
+    /* ENROLLEE */
+    private static EnrolleeRepository enrolleeRepository = new EnrolleeMysqlRepository(connectionPool, "enrollee");
     private static EnrolleeDtoMapper enrolleeDtoMapper = new EnrolleeDtoMapper(modelMapper, dateFormat);
     private static EnrolleeEntityPresenter enrolleeEntityPresenter = new EnrolleeEntityPresenter(modelMapper, dateFormat);
 
 
     /* CT CERTIFICATE */
-    private static CtCertificateRepository ctCertificateRepository = new CtCertificateJsonRepository(enrolleeRepository);
+    private static CtCertificateRepository ctCertificateRepository = new CtCertificateMysqlRepository(connectionPool,
+        "ct_certificate", (MysqlCRUDRepository<Enrollee, ?>) enrolleeRepository);
     private static CtCertificateDtoMapper ctCertificateDtoMapper = new CtCertificateDtoMapper(modelMapper, enrolleeRepository);
     private static CtCertificateEntityPresenter ctCertificateEntityPresenter = new CtCertificateEntityPresenter(modelMapper);
 
 
     /* EDUCATION DOCUMENT */
-    private static EducationDocumentRepository educationDocumentRepository = new EducationDocumentJsonRepository(enrolleeRepository);
+    private static EducationDocumentRepository educationDocumentRepository = new EducationDocumentMysqlRepository(
+        connectionPool,
+        "education_document",
+        (MysqlCRUDRepository<Enrollee, ?>) enrolleeRepository);
+
     private static EducationDocumentDtoMapper educationDocumentDtoMapper = new EducationDocumentDtoMapper(modelMapper, enrolleeRepository);
     private static EducationDocumentEntityPresenter educationDocumentEntityPresenter = new EducationDocumentEntityPresenter(modelMapper);
 
     /* APPLICATION */
-    private static UniversityApplicationRepository universityApplicationRepository = new UniversityApplicationJsonRepository(enrolleeRepository, educationDocumentRepository, ctCertificateRepository);
+    private static UniversityApplicationRepository universityApplicationRepository = new UniversityApplicationMysqlRepository(
+        connectionPool,
+        "university_application",
+        (MysqlCRUDRepository<Enrollee, ?>) enrolleeRepository,
+        (MysqlCRUDRepository<EducationDocument, ?>) educationDocumentRepository,
+        (MysqlCRUDRepository<CtCertificate, Integer>) ctCertificateRepository);
+
     private static UniversityApplicationDtoMapper universityApplicationDtoMapper = new UniversityApplicationDtoMapper(modelMapper, dateFormat, enrolleeRepository, ctCertificateRepository, educationDocumentRepository);
     private static UniversityApplicationEntityPresenter universityApplicationEntityPresenter = new UniversityApplicationEntityPresenter(modelMapper, dateFormat, ctCertificateEntityPresenter, educationDocumentEntityPresenter);
 
@@ -82,8 +101,7 @@ public class Config {
      * Enrollee Service.
      */
     public static EnrolleeService enrolleeService= new EnrolleeServiceImpl(
-            enrolleeRepository, enrolleeDtoMapper, enrolleeEntityPresenter, validator,
-            Arrays.asList(ctCertificateRepository, educationDocumentRepository, universityApplicationRepository)
+            enrolleeRepository, enrolleeDtoMapper, enrolleeEntityPresenter, validator
     );
 
     /**

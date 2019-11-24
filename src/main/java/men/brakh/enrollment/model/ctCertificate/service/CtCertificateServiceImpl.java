@@ -36,10 +36,10 @@ public class CtCertificateServiceImpl extends AbstractCRUDEntityService<
         ctCertificateRepository = (CtCertificateRepository) crudRepository;
     }
 
-    private void throwIfCertificateWithYearAndSubjectAlreadyExist(final Integer year, final String subjectString)
+    private void throwIfCertificateWithYearAndSubjectAlreadyExist(final Integer enrolleeId, final Integer year, final String subjectString)
             throws BadRequestException {
         Subject subject = subjectString != null ? Subject.valueOf(subjectString) : null;
-        List<CtCertificate> ctCertificates = ctCertificateRepository.findByYearAndSubject(year, subject);
+        List<CtCertificate> ctCertificates = ctCertificateRepository.findByYearAndSubject(enrolleeId, year, subject);
         if (ctCertificates.size() > 0) {
             throw new BadRequestException("You already have " + subjectString + " certificate for " + year + " year");
         }
@@ -55,7 +55,8 @@ public class CtCertificateServiceImpl extends AbstractCRUDEntityService<
 
     @Override
     public CtCertificateDto create(final CtCertificateCreateRequest createRequest) throws BadRequestException {
-        throwIfCertificateWithYearAndSubjectAlreadyExist(createRequest.getYear(), createRequest.getSubject());
+        throwIfCertificateWithYearAndSubjectAlreadyExist(createRequest.getEnrolleeId(),
+            createRequest.getYear(), createRequest.getSubject());
         throwIfCertificateWithIdentifierAndNumberAlreadyExist(createRequest.getCertificateIdentifier(),
                 createRequest.getCertificateNumber());
 
@@ -79,7 +80,9 @@ public class CtCertificateServiceImpl extends AbstractCRUDEntityService<
 
     @Override
     public CtCertificateDto update(final Integer id, final CtCertificateUpdateRequest updateRequest) throws BadRequestException {
-        throwIfCertificateWithYearAndSubjectAlreadyExist(updateRequest.getYear(), updateRequest.getSubject());
+        final CtCertificate ctCertificate = ctCertificateRepository.findById(id).orElseThrow(BadRequestException::new);
+        throwIfCertificateWithYearAndSubjectAlreadyExist(ctCertificate.getEnrollee().getId(),
+            updateRequest.getYear(), updateRequest.getSubject());
         throwIfCertificateWithIdentifierAndNumberAlreadyExist(updateRequest.getCertificateIdentifier(),
             updateRequest.getCertificateNumber());
         return updateTemplate.update(id, updateRequest, CtCertificateDto.class);

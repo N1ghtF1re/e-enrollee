@@ -1,7 +1,7 @@
 package men.brakh.enrollment.model.ctCertificate.repository;
 
 import com.google.gson.GsonBuilder;
-import men.brakh.enrollment.jsonadapters.BaseEntityOnlyIntIdJsonAdapter;
+import men.brakh.enrollment.infrastructure.json.jsonadapters.BaseEntityOnlyIntIdJsonAdapter;
 import men.brakh.enrollment.model.enrollee.Enrollee;
 import men.brakh.enrollment.model.enrollee.repository.EnrolleeRepository;
 import men.brakh.enrollment.model.ctCertificate.CtCertificate;
@@ -44,9 +44,10 @@ public class CtCertificateJsonRepository
     }
 
     @Override
-    public List<CtCertificate> findByYearAndSubject(final Integer year, final Subject subject) {
+    public List<CtCertificate> findByYearAndSubject(final Integer enrolleeId, final Integer year, final Subject subject) {
         return find(ctCertificate ->
-                ctCertificate.getSubject().equals(subject) && ctCertificate.getYear().equals(year));
+                ctCertificate.getSubject().equals(subject) && ctCertificate.getYear().equals(year)
+                    && ctCertificate.getEnrollee().getId().equals(enrolleeId));
     }
 
     @Override

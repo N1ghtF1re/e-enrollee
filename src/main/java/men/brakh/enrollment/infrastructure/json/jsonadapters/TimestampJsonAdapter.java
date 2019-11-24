@@ -1,4 +1,4 @@
-package men.brakh.enrollment.jsonadapters;
+package men.brakh.enrollment.infrastructure.json.jsonadapters;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;

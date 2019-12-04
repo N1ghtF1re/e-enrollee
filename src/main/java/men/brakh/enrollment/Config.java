@@ -1,5 +1,6 @@
 package men.brakh.enrollment;
 
+import men.brakh.enrollment.infrastructure.authorization.AuthorizationManager;
 import men.brakh.enrollment.infrastructure.jdbc.ConnectionPool;
 import men.brakh.enrollment.infrastructure.jdbc.HikariConnectionPool;
 import men.brakh.enrollment.model.ctCertificate.CtCertificate;
@@ -16,6 +17,14 @@ import men.brakh.enrollment.model.educationDocument.repository.EducationDocument
 import men.brakh.enrollment.model.educationDocument.repository.EducationDocumentRepository;
 import men.brakh.enrollment.model.educationDocument.service.EducationDocumentService;
 import men.brakh.enrollment.model.educationDocument.service.EducationDocumentServiceImpl;
+import men.brakh.enrollment.model.employee.credentials.EmployeeCredentialsMysqlRepository;
+import men.brakh.enrollment.model.employee.credentials.EmployeeCredentialsRepository;
+import men.brakh.enrollment.model.employee.mapping.EmployeeDtoMapper;
+import men.brakh.enrollment.model.employee.mapping.EmployeeDtoPresenter;
+import men.brakh.enrollment.model.employee.repository.EmployeeMysqlRepository;
+import men.brakh.enrollment.model.employee.repository.EmployeeRepository;
+import men.brakh.enrollment.model.employee.service.EmployeeService;
+import men.brakh.enrollment.model.employee.service.EmployeeServiceImpl;
 import men.brakh.enrollment.model.enrollee.Enrollee;
 import men.brakh.enrollment.model.enrollee.mapping.EnrolleeDtoMapper;
 import men.brakh.enrollment.model.enrollee.mapping.EnrolleeEntityPresenter;
@@ -38,6 +47,8 @@ import org.modelmapper.ModelMapper;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -61,7 +72,27 @@ public class Config {
     private static ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
     private static Validator validator = validatorFactory.usingContext().getValidator();
 
+    private static MessageDigest messageDigest;
+
+    static {
+        try {
+            messageDigest = MessageDigest.getInstance("SHA-512");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     private static ConnectionPool connectionPool = new HikariConnectionPool();
+
+    /* EMPLOYEE */
+    private static EmployeeRepository employeeRepository = new EmployeeMysqlRepository(connectionPool, "employee");
+    private static EmployeeDtoMapper employeeDtoMapper = new EmployeeDtoMapper(modelMapper);
+    private static EmployeeDtoPresenter employeeDtoPresenter = new EmployeeDtoPresenter(modelMapper);
+    private static EmployeeCredentialsRepository employeeCredentialsRepository = new EmployeeCredentialsMysqlRepository(
+        connectionPool,
+        "employee_credentials"
+    );
 
     /* ENROLLEE */
     private static EnrolleeRepository enrolleeRepository = new EnrolleeMysqlRepository(connectionPool, "enrollee");
@@ -130,4 +161,18 @@ public class Config {
      */
     public static InterimListsService interimListsService = new InterimListsServiceImpl(enrolleeEntityPresenter,
             universityApplicationRepository);
+
+    /**
+     * Employee Service
+     */
+    public static EmployeeService employeeService = new EmployeeServiceImpl(
+        employeeRepository,
+        employeeDtoMapper,
+        employeeDtoPresenter,
+        validator,
+        employeeCredentialsRepository,
+        messageDigest
+    );
+
+    public static AuthorizationManager authorizationManager = new AuthorizationManager();
 }

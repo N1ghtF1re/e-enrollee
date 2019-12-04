@@ -72,7 +72,7 @@ public class CtCertificateDtoMapperTest {
                 .certificateNumber("1111111")
                 .ctPoints(1)
                 .enrolleeId(1)
-                .subject("History")
+                .subject("HISTORY")
                 .build();
 
         CtCertificate ctCertificate = CtCertificate.builder()
@@ -117,7 +117,7 @@ public class CtCertificateDtoMapperTest {
                 .certificateId("111-11-1")
                 .certificateNumber("1111111")
                 .ctPoints(1)
-                .subject("History")
+                .subject("HISTORY")
                 .build();
 
         CtCertificate ctCertificate = CtCertificate.builder()

@@ -1,0 +1,12 @@
+label.login = Авторизация
+label.registration = Регистрация
+
+placeholder.username = Логин
+placeholder.password = Пароль
+placeholder.firstName = Введите имя...
+placeholder.lastName = Введите фамилию...
+placeholder.middleName = Введите отчество...
+
+
+button.login = Вход
+button.registration = Регистрация

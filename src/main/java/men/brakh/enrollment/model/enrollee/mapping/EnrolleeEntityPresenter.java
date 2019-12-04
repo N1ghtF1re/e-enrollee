@@ -26,7 +26,7 @@ public class EnrolleeEntityPresenter implements EntityPresenter<Enrollee, Enroll
 
     @Override
     public EnrolleeDto mapToDto(final Enrollee entity, final Class<? extends EnrolleeDto> dtoClass) {
-        EnrolleeDto enrolleeDto = modelMapper.map(entity, EnrolleeDto.class);
+        EnrolleeDto enrolleeDto = modelMapper.map(entity, dtoClass);
         enrolleeDto.setBirthDate(dateFormat.format(entity.getBirthDate()));
         return enrolleeDto;
     }

@@ -7,7 +7,7 @@ RUN gradle build --no-daemon
 
 FROM tomcat:9-jre8-alpine
 
-RUN mv build/libs/e-enrollment-1.0.war /usr/local/tomcat/webapps/enrollee.war
+COPY --from=build /home/gradle/src/build/libs/e-enrollment-1.0.war  /usr/local/tomcat/webapps/enrollee.war
 
 EXPOSE 8080
 

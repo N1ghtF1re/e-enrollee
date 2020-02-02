@@ -43,7 +43,7 @@
 <div class="subNav">
 <ul class="navList">
 <li>Prev&nbsp;Class</li>
-<li><a href="../../../../men/brakh/enrollment/service/CRUDEntityService.html" title="interface in men.brakh.enrollment.service"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../men/brakh/enrollment/service/CRUDEntityService.html" title="interface in men.brakh.enrollment.application.service"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?men/brakh/enrollment/service/AbstractCRUDEntityService.html" target="_top">Frames</a></li>
@@ -85,15 +85,15 @@
 <!-- ========= END OF TOP NAVBAR ========= -->
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle">men.brakh.enrollment.service</div>
-<h2 title="Class AbstractCRUDEntityService" class="title">Class AbstractCRUDEntityService&lt;T extends <a href="../../../../men/brakh/enrollment/model/BaseEntity.html" title="interface in men.brakh.enrollment.model">BaseEntity</a>,D extends <a href="../../../../men/brakh/enrollment/model/Dto.html" title="interface in men.brakh.enrollment.model">Dto</a>,C extends <a href="../../../../men/brakh/enrollment/model/CreateDto.html" title="interface in men.brakh.enrollment.model">CreateDto</a>,U extends <a href="../../../../men/brakh/enrollment/model/UpdateDto.html" title="interface in men.brakh.enrollment.model">UpdateDto</a>,I&gt;</h2>
+<div class="subTitle">men.brakh.enrollment.application.service</div>
+<h2 title="Class AbstractCRUDEntityService" class="title">Class AbstractCRUDEntityService&lt;T extends <a href="../../../../men/brakh/enrollment/model/BaseEntity.html" title="interface in men.brakh.enrollment.domain">BaseEntity</a>,D extends <a href="../../../../men/brakh/enrollment/model/Dto.html" title="interface in men.brakh.enrollment.domain">Dto</a>,C extends <a href="../../../../men/brakh/enrollment/model/CreateDto.html" title="interface in men.brakh.enrollment.domain">CreateDto</a>,U extends <a href="../../../../men/brakh/enrollment/model/UpdateDto.html" title="interface in men.brakh.enrollment.domain">UpdateDto</a>,I&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>men.brakh.enrollment.service.AbstractCRUDEntityService&lt;T,D,C,U,I&gt;</li>
+<li>men.brakh.enrollment.application.service.AbstractCRUDEntityService&lt;T,D,C,U,I&gt;</li>
 </ul>
 </li>
 </ul>
@@ -110,17 +110,17 @@
 </dl>
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../men/brakh/enrollment/service/CRUDEntityService.html" title="interface in men.brakh.enrollment.service">CRUDEntityService</a>&lt;D,C,U,I&gt;, <a href="../../../../men/brakh/enrollment/service/EntityCreateService.html" title="interface in men.brakh.enrollment.service">EntityCreateService</a>&lt;D,C&gt;, <a href="../../../../men/brakh/enrollment/service/EntityDeleteService.html" title="interface in men.brakh.enrollment.service">EntityDeleteService</a>&lt;I&gt;, <a href="../../../../men/brakh/enrollment/service/EntityReadService.html" title="interface in men.brakh.enrollment.service">EntityReadService</a>&lt;D,I&gt;, <a href="../../../../men/brakh/enrollment/service/EntityUpdateService.html" title="interface in men.brakh.enrollment.service">EntityUpdateService</a>&lt;D,U,I&gt;</dd>
+<dd><a href="../../../../men/brakh/enrollment/service/CRUDEntityService.html" title="interface in men.brakh.enrollment.application.service">CRUDEntityService</a>&lt;D,C,U,I&gt;, <a href="../../../../men/brakh/enrollment/service/EntityCreateService.html" title="interface in men.brakh.enrollment.application.service">EntityCreateService</a>&lt;D,C&gt;, <a href="../../../../men/brakh/enrollment/service/EntityDeleteService.html" title="interface in men.brakh.enrollment.application.service">EntityDeleteService</a>&lt;I&gt;, <a href="../../../../men/brakh/enrollment/service/EntityReadService.html" title="interface in men.brakh.enrollment.application.service">EntityReadService</a>&lt;D,I&gt;, <a href="../../../../men/brakh/enrollment/service/EntityUpdateService.html" title="interface in men.brakh.enrollment.application.service">EntityUpdateService</a>&lt;D,U,I&gt;</dd>
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../men/brakh/enrollment/model/ctCertificate/service/CtCertificateServiceImpl.html" title="class in men.brakh.enrollment.model.ctCertificate.service">CtCertificateServiceImpl</a>, <a href="../../../../men/brakh/enrollment/model/educationDocument/service/EducationDocumentServiceImpl.html" title="class in men.brakh.enrollment.model.educationDocument.service">EducationDocumentServiceImpl</a>, <a href="../../../../men/brakh/enrollment/model/enrollee/service/EnrolleeServiceImpl.html" title="class in men.brakh.enrollment.model.enrollee.service">EnrolleeServiceImpl</a>, <a href="../../../../men/brakh/enrollment/model/universityApplication/service/UniversityApplicationServiceImpl.html" title="class in men.brakh.enrollment.model.universityApplication.service">UniversityApplicationServiceImpl</a></dd>
+<dd><a href="../../../../men/brakh/enrollment/model/ctCertificate/service/CtCertificateServiceImpl.html" title="class in men.brakh.enrollment.domain.ctCertificate.service">CtCertificateServiceImpl</a>, <a href="../../../../men/brakh/enrollment/model/educationDocument/service/EducationDocumentServiceImpl.html" title="class in men.brakh.enrollment.domain.educationDocument.service">EducationDocumentServiceImpl</a>, <a href="../../../../men/brakh/enrollment/model/enrollee/service/EnrolleeServiceImpl.html" title="class in men.brakh.enrollment.domain.enrollee.service">EnrolleeServiceImpl</a>, <a href="../../../../men/brakh/enrollment/model/universityApplication/service/UniversityApplicationServiceImpl.html" title="class in men.brakh.enrollment.domain.universityApplication.service">UniversityApplicationServiceImpl</a></dd>
 </dl>
 <hr>
 <br>
-<pre>public abstract class <span class="typeNameLabel">AbstractCRUDEntityService&lt;T extends <a href="../../../../men/brakh/enrollment/model/BaseEntity.html" title="interface in men.brakh.enrollment.model">BaseEntity</a>,D extends <a href="../../../../men/brakh/enrollment/model/Dto.html" title="interface in men.brakh.enrollment.model">Dto</a>,C extends <a href="../../../../men/brakh/enrollment/model/CreateDto.html" title="interface in men.brakh.enrollment.model">CreateDto</a>,U extends <a href="../../../../men/brakh/enrollment/model/UpdateDto.html" title="interface in men.brakh.enrollment.model">UpdateDto</a>,I&gt;</span>
+<pre>public abstract class <span class="typeNameLabel">AbstractCRUDEntityService&lt;T extends <a href="../../../../men/brakh/enrollment/model/BaseEntity.html" title="interface in men.brakh.enrollment.domain">BaseEntity</a>,D extends <a href="../../../../men/brakh/enrollment/model/Dto.html" title="interface in men.brakh.enrollment.domain">Dto</a>,C extends <a href="../../../../men/brakh/enrollment/model/CreateDto.html" title="interface in men.brakh.enrollment.domain">CreateDto</a>,U extends <a href="../../../../men/brakh/enrollment/model/UpdateDto.html" title="interface in men.brakh.enrollment.domain">UpdateDto</a>,I&gt;</span>
 extends java.lang.Object
-implements <a href="../../../../men/brakh/enrollment/service/CRUDEntityService.html" title="interface in men.brakh.enrollment.service">CRUDEntityService</a>&lt;D,C,U,I&gt;</pre>
+implements <a href="../../../../men/brakh/enrollment/service/CRUDEntityService.html" title="interface in men.brakh.enrollment.application.service">CRUDEntityService</a>&lt;D,C,U,I&gt;</pre>
 <div class="block">Abstract CRUD Service</div>
 </li>
 </ul>
@@ -141,19 +141,19 @@ implements <a href="../../../../men/brakh/enrollment/service/CRUDEntityService.h
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="../../../../men/brakh/enrollment/template/CreateTemplate.html" title="class in men.brakh.enrollment.template">CreateTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">C</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a>&gt;</code></td>
+<td class="colFirst"><code>protected <a href="../../../../men/brakh/enrollment/template/CreateTemplate.html" title="class in men.brakh.enrollment.application.template">CreateTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">C</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html#createTemplate">createTemplate</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected <a href="../../../../men/brakh/enrollment/template/DeleteTemplate.html" title="class in men.brakh.enrollment.template">DeleteTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt;</code></td>
+<td class="colFirst"><code>protected <a href="../../../../men/brakh/enrollment/template/DeleteTemplate.html" title="class in men.brakh.enrollment.application.template">DeleteTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html#deleteTemplate">deleteTemplate</a></span></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="../../../../men/brakh/enrollment/template/GetTemplate.html" title="class in men.brakh.enrollment.template">GetTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt;</code></td>
+<td class="colFirst"><code>protected <a href="../../../../men/brakh/enrollment/template/GetTemplate.html" title="class in men.brakh.enrollment.application.template">GetTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html#getTemplate">getTemplate</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected <a href="../../../../men/brakh/enrollment/template/UpdateTemplate.html" title="class in men.brakh.enrollment.template">UpdateTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">U</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt;</code></td>
+<td class="colFirst"><code>protected <a href="../../../../men/brakh/enrollment/template/UpdateTemplate.html" title="class in men.brakh.enrollment.application.template">UpdateTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">U</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html#updateTemplate">updateTemplate</a></span></code>&nbsp;</td>
 </tr>
 </table>
@@ -171,9 +171,9 @@ implements <a href="../../../../men/brakh/enrollment/service/CRUDEntityService.h
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html#AbstractCRUDEntityService-men.brakh.enrollment.repository.CRUDRepository-men.brakh.enrollment.mapping.mapper.DtoMapper-men.brakh.enrollment.mapping.presenter.EntityPresenter-javax.validation.Validator-">AbstractCRUDEntityService</a></span>(<a href="../../../../men/brakh/enrollment/repository/CRUDRepository.html" title="interface in men.brakh.enrollment.repository">CRUDRepository</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt;&nbsp;crudRepository,
-                         <a href="../../../../men/brakh/enrollment/mapping/mapper/DtoMapper.html" title="interface in men.brakh.enrollment.mapping.mapper">DtoMapper</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>&gt;&nbsp;dtoMapper,
-                         <a href="../../../../men/brakh/enrollment/mapping/presenter/EntityPresenter.html" title="interface in men.brakh.enrollment.mapping.presenter">EntityPresenter</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a>&gt;&nbsp;entityPresenter,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html#AbstractCRUDEntityService-men.brakh.enrollment.application.repository.CRUDRepository-men.brakh.enrollment.application.mapping.mapper.DtoMapper-men.brakh.enrollment.application.mapping.presenter.EntityPresenter-javax.validation.Validator-">AbstractCRUDEntityService</a></span>(<a href="../../../../men/brakh/enrollment/repository/CRUDRepository.html" title="interface in men.brakh.enrollment.application.repository">CRUDRepository</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt;&nbsp;crudRepository,
+                         <a href="../../../../men/brakh/enrollment/mapping/mapper/DtoMapper.html" title="interface in men.brakh.enrollment.application.mapping.mapper">DtoMapper</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>&gt;&nbsp;dtoMapper,
+                         <a href="../../../../men/brakh/enrollment/mapping/presenter/EntityPresenter.html" title="interface in men.brakh.enrollment.application.mapping.presenter">EntityPresenter</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a>&gt;&nbsp;entityPresenter,
                          javax.validation.Validator&nbsp;validator)</code>&nbsp;</td>
 </tr>
 </table>
@@ -193,31 +193,31 @@ implements <a href="../../../../men/brakh/enrollment/service/CRUDEntityService.h
 <code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.men.brakh.enrollment.service.EntityCreateService">
+<li class="blockList"><a name="methods.inherited.from.class.men.brakh.enrollment.application.service.EntityCreateService">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;men.brakh.enrollment.service.<a href="../../../../men/brakh/enrollment/service/EntityCreateService.html" title="interface in men.brakh.enrollment.service">EntityCreateService</a></h3>
+<h3>Methods inherited from interface&nbsp;men.brakh.enrollment.application.service.<a href="../../../../men/brakh/enrollment/service/EntityCreateService.html" title="interface in men.brakh.enrollment.application.service">EntityCreateService</a></h3>
 <code><a href="../../../../men/brakh/enrollment/service/EntityCreateService.html#create-C-">create</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.men.brakh.enrollment.service.EntityUpdateService">
+<li class="blockList"><a name="methods.inherited.from.class.men.brakh.enrollment.application.service.EntityUpdateService">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;men.brakh.enrollment.service.<a href="../../../../men/brakh/enrollment/service/EntityUpdateService.html" title="interface in men.brakh.enrollment.service">EntityUpdateService</a></h3>
+<h3>Methods inherited from interface&nbsp;men.brakh.enrollment.application.service.<a href="../../../../men/brakh/enrollment/service/EntityUpdateService.html" title="interface in men.brakh.enrollment.application.service">EntityUpdateService</a></h3>
 <code><a href="../../../../men/brakh/enrollment/service/EntityUpdateService.html#update-I-U-">update</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.men.brakh.enrollment.service.EntityDeleteService">
+<li class="blockList"><a name="methods.inherited.from.class.men.brakh.enrollment.application.service.EntityDeleteService">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;men.brakh.enrollment.service.<a href="../../../../men/brakh/enrollment/service/EntityDeleteService.html" title="interface in men.brakh.enrollment.service">EntityDeleteService</a></h3>
+<h3>Methods inherited from interface&nbsp;men.brakh.enrollment.application.service.<a href="../../../../men/brakh/enrollment/service/EntityDeleteService.html" title="interface in men.brakh.enrollment.application.service">EntityDeleteService</a></h3>
 <code><a href="../../../../men/brakh/enrollment/service/EntityDeleteService.html#delete-I-">delete</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.men.brakh.enrollment.service.EntityReadService">
+<li class="blockList"><a name="methods.inherited.from.class.men.brakh.enrollment.application.service.EntityReadService">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;men.brakh.enrollment.service.<a href="../../../../men/brakh/enrollment/service/EntityReadService.html" title="interface in men.brakh.enrollment.service">EntityReadService</a></h3>
+<h3>Methods inherited from interface&nbsp;men.brakh.enrollment.application.service.<a href="../../../../men/brakh/enrollment/service/EntityReadService.html" title="interface in men.brakh.enrollment.application.service">EntityReadService</a></h3>
 <code><a href="../../../../men/brakh/enrollment/service/EntityReadService.html#getAll--">getAll</a>, <a href="../../../../men/brakh/enrollment/service/EntityReadService.html#getById-I-">getById</a></code></li>
 </ul>
 </li>
@@ -240,7 +240,7 @@ implements <a href="../../../../men/brakh/enrollment/service/CRUDEntityService.h
 <ul class="blockList">
 <li class="blockList">
 <h4>createTemplate</h4>
-<pre>protected final&nbsp;<a href="../../../../men/brakh/enrollment/template/CreateTemplate.html" title="class in men.brakh.enrollment.template">CreateTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a> extends <a href="../../../../men/brakh/enrollment/model/BaseEntity.html" title="interface in men.brakh.enrollment.model">BaseEntity</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">C</a> extends <a href="../../../../men/brakh/enrollment/model/CreateDto.html" title="interface in men.brakh.enrollment.model">CreateDto</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a> extends <a href="../../../../men/brakh/enrollment/model/Dto.html" title="interface in men.brakh.enrollment.model">Dto</a>&gt; createTemplate</pre>
+<pre>protected final&nbsp;<a href="../../../../men/brakh/enrollment/template/CreateTemplate.html" title="class in men.brakh.enrollment.application.template">CreateTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a> extends <a href="../../../../men/brakh/enrollment/model/BaseEntity.html" title="interface in men.brakh.enrollment.domain">BaseEntity</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">C</a> extends <a href="../../../../men/brakh/enrollment/model/CreateDto.html" title="interface in men.brakh.enrollment.domain">CreateDto</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a> extends <a href="../../../../men/brakh/enrollment/model/Dto.html" title="interface in men.brakh.enrollment.domain">Dto</a>&gt; createTemplate</pre>
 </li>
 </ul>
 <a name="updateTemplate">
@@ -249,7 +249,7 @@ implements <a href="../../../../men/brakh/enrollment/service/CRUDEntityService.h
 <ul class="blockList">
 <li class="blockList">
 <h4>updateTemplate</h4>
-<pre>protected final&nbsp;<a href="../../../../men/brakh/enrollment/template/UpdateTemplate.html" title="class in men.brakh.enrollment.template">UpdateTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a> extends <a href="../../../../men/brakh/enrollment/model/BaseEntity.html" title="interface in men.brakh.enrollment.model">BaseEntity</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">U</a> extends <a href="../../../../men/brakh/enrollment/model/UpdateDto.html" title="interface in men.brakh.enrollment.model">UpdateDto</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a> extends <a href="../../../../men/brakh/enrollment/model/Dto.html" title="interface in men.brakh.enrollment.model">Dto</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt; updateTemplate</pre>
+<pre>protected final&nbsp;<a href="../../../../men/brakh/enrollment/template/UpdateTemplate.html" title="class in men.brakh.enrollment.application.template">UpdateTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a> extends <a href="../../../../men/brakh/enrollment/model/BaseEntity.html" title="interface in men.brakh.enrollment.domain">BaseEntity</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">U</a> extends <a href="../../../../men/brakh/enrollment/model/UpdateDto.html" title="interface in men.brakh.enrollment.domain">UpdateDto</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a> extends <a href="../../../../men/brakh/enrollment/model/Dto.html" title="interface in men.brakh.enrollment.domain">Dto</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt; updateTemplate</pre>
 </li>
 </ul>
 <a name="getTemplate">
@@ -258,7 +258,7 @@ implements <a href="../../../../men/brakh/enrollment/service/CRUDEntityService.h
 <ul class="blockList">
 <li class="blockList">
 <h4>getTemplate</h4>
-<pre>protected final&nbsp;<a href="../../../../men/brakh/enrollment/template/GetTemplate.html" title="class in men.brakh.enrollment.template">GetTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a> extends <a href="../../../../men/brakh/enrollment/model/BaseEntity.html" title="interface in men.brakh.enrollment.model">BaseEntity</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a> extends <a href="../../../../men/brakh/enrollment/model/Dto.html" title="interface in men.brakh.enrollment.model">Dto</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt; getTemplate</pre>
+<pre>protected final&nbsp;<a href="../../../../men/brakh/enrollment/template/GetTemplate.html" title="class in men.brakh.enrollment.application.template">GetTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a> extends <a href="../../../../men/brakh/enrollment/model/BaseEntity.html" title="interface in men.brakh.enrollment.domain">BaseEntity</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a> extends <a href="../../../../men/brakh/enrollment/model/Dto.html" title="interface in men.brakh.enrollment.domain">Dto</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt; getTemplate</pre>
 </li>
 </ul>
 <a name="deleteTemplate">
@@ -267,7 +267,7 @@ implements <a href="../../../../men/brakh/enrollment/service/CRUDEntityService.h
 <ul class="blockListLast">
 <li class="blockList">
 <h4>deleteTemplate</h4>
-<pre>protected final&nbsp;<a href="../../../../men/brakh/enrollment/template/DeleteTemplate.html" title="class in men.brakh.enrollment.template">DeleteTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a> extends <a href="../../../../men/brakh/enrollment/model/BaseEntity.html" title="interface in men.brakh.enrollment.model">BaseEntity</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt; deleteTemplate</pre>
+<pre>protected final&nbsp;<a href="../../../../men/brakh/enrollment/template/DeleteTemplate.html" title="class in men.brakh.enrollment.application.template">DeleteTemplate</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a> extends <a href="../../../../men/brakh/enrollment/model/BaseEntity.html" title="interface in men.brakh.enrollment.domain">BaseEntity</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt; deleteTemplate</pre>
 </li>
 </ul>
 </li>
@@ -278,15 +278,15 @@ implements <a href="../../../../men/brakh/enrollment/service/CRUDEntityService.h
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="AbstractCRUDEntityService-men.brakh.enrollment.repository.CRUDRepository-men.brakh.enrollment.mapping.mapper.DtoMapper-men.brakh.enrollment.mapping.presenter.EntityPresenter-javax.validation.Validator-">
+<a name="AbstractCRUDEntityService-men.brakh.enrollment.application.repository.CRUDRepository-men.brakh.enrollment.application.mapping.mapper.DtoMapper-men.brakh.enrollment.application.mapping.presenter.EntityPresenter-javax.validation.Validator-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>AbstractCRUDEntityService</h4>
-<pre>public&nbsp;AbstractCRUDEntityService(<a href="../../../../men/brakh/enrollment/repository/CRUDRepository.html" title="interface in men.brakh.enrollment.repository">CRUDRepository</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt;&nbsp;crudRepository,
-                                 <a href="../../../../men/brakh/enrollment/mapping/mapper/DtoMapper.html" title="interface in men.brakh.enrollment.mapping.mapper">DtoMapper</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>&gt;&nbsp;dtoMapper,
-                                 <a href="../../../../men/brakh/enrollment/mapping/presenter/EntityPresenter.html" title="interface in men.brakh.enrollment.mapping.presenter">EntityPresenter</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a>&gt;&nbsp;entityPresenter,
+<pre>public&nbsp;AbstractCRUDEntityService(<a href="../../../../men/brakh/enrollment/repository/CRUDRepository.html" title="interface in men.brakh.enrollment.application.repository">CRUDRepository</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">I</a>&gt;&nbsp;crudRepository,
+                                 <a href="../../../../men/brakh/enrollment/mapping/mapper/DtoMapper.html" title="interface in men.brakh.enrollment.application.mapping.mapper">DtoMapper</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>&gt;&nbsp;dtoMapper,
+                                 <a href="../../../../men/brakh/enrollment/mapping/presenter/EntityPresenter.html" title="interface in men.brakh.enrollment.application.mapping.presenter">EntityPresenter</a>&lt;<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">T</a>,<a href="../../../../men/brakh/enrollment/service/AbstractCRUDEntityService.html" title="type parameter in AbstractCRUDEntityService">D</a>&gt;&nbsp;entityPresenter,
                                  javax.validation.Validator&nbsp;validator)</pre>
 </li>
 </ul>
@@ -318,7 +318,7 @@ implements <a href="../../../../men/brakh/enrollment/service/CRUDEntityService.h
 <div class="subNav">
 <ul class="navList">
 <li>Prev&nbsp;Class</li>
-<li><a href="../../../../men/brakh/enrollment/service/CRUDEntityService.html" title="interface in men.brakh.enrollment.service"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../men/brakh/enrollment/service/CRUDEntityService.html" title="interface in men.brakh.enrollment.application.service"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?men/brakh/enrollment/service/AbstractCRUDEntityService.html" target="_top">Frames</a></li>

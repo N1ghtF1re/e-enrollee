@@ -12,6 +12,7 @@ import men.brakh.enrollment.domain.universityApplication.mapping.UniversityAppli
 import men.brakh.enrollment.domain.universityApplication.mapping.UniversityApplicationEntityPresenter;
 import men.brakh.enrollment.domain.universityApplication.repository.UniversityApplicationRepository;
 import men.brakh.enrollment.application.service.AbstractCRUDEntityService;
+import men.brakh.enrollment.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -55,12 +56,12 @@ public class UniversityApplicationServiceImpl extends AbstractCRUDEntityService<
     }
 
     @Override
-    public void delete(final Integer id) throws BadRequestException {
+    public void delete(final Integer id) throws BadRequestException, ResourceNotFoundException {
         deleteTemplate.delete(id);
     }
 
     @Override
-    public UniversityApplicationDto getById(final Integer id) throws BadRequestException {
+    public UniversityApplicationDto getById(final Integer id) throws ResourceNotFoundException {
         return getTemplate.getById(id, UniversityApplicationDto.class);
     }
 
@@ -71,7 +72,7 @@ public class UniversityApplicationServiceImpl extends AbstractCRUDEntityService<
 
     @Override
     public UniversityApplicationDto update(final Integer id,
-                               final UniversityApplicationUpdateRequest updateRequest) throws BadRequestException {
+                               final UniversityApplicationUpdateRequest updateRequest) throws BadRequestException, ResourceNotFoundException {
         return updateTemplate.update(id, updateRequest, UniversityApplicationDto.class);
     }
 }

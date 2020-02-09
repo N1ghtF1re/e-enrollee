@@ -13,6 +13,7 @@ import men.brakh.enrollment.exception.BadRequestException;
 import men.brakh.enrollment.application.mapping.mapper.DtoMapper;
 import men.brakh.enrollment.application.mapping.presenter.EntityPresenter;
 import men.brakh.enrollment.application.service.AbstractCRUDEntityService;
+import men.brakh.enrollment.exception.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,13 +65,13 @@ public class CtCertificateServiceImpl extends AbstractCRUDEntityService<
 
     @Override
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") final Integer id) throws BadRequestException {
+    public void delete(@PathVariable("id") final Integer id) throws BadRequestException, ResourceNotFoundException {
         deleteTemplate.delete(id);
     }
 
     @Override
     @GetMapping("/{id}")
-    public @ResponseBody CtCertificateDto getById(@PathVariable("id") final Integer id) throws BadRequestException {
+    public @ResponseBody CtCertificateDto getById(@PathVariable("id") final Integer id) throws ResourceNotFoundException {
         return getTemplate.getById(id, CtCertificateDto.class);
     }
 
@@ -85,7 +86,7 @@ public class CtCertificateServiceImpl extends AbstractCRUDEntityService<
     @Override
     @PutMapping("/{id}")
     public @ResponseBody CtCertificateDto update(@PathVariable("id") final Integer id,
-                                   @RequestBody final CtCertificateUpdateRequest updateRequest) throws BadRequestException {
+                                   @RequestBody final CtCertificateUpdateRequest updateRequest) throws BadRequestException, ResourceNotFoundException {
 
         final CtCertificate ctCertificate = ctCertificateRepository.findById(id).orElseThrow(BadRequestException::new);
 

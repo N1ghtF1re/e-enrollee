@@ -11,6 +11,7 @@ import men.brakh.enrollment.domain.educationDocument.mapping.EducationDocumentDt
 import men.brakh.enrollment.domain.educationDocument.mapping.EducationDocumentEntityPresenter;
 import men.brakh.enrollment.domain.educationDocument.repository.EducationDocumentRepository;
 import men.brakh.enrollment.application.service.AbstractCRUDEntityService;
+import men.brakh.enrollment.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -38,12 +39,12 @@ public class EducationDocumentServiceImpl extends AbstractCRUDEntityService<
     }
 
     @Override
-    public void delete(final Integer id) throws BadRequestException {
+    public void delete(final Integer id) throws BadRequestException, ResourceNotFoundException {
         deleteTemplate.delete(id);
     }
 
     @Override
-    public EducationDocumentDto getById(final Integer id) throws BadRequestException {
+    public EducationDocumentDto getById(final Integer id) throws ResourceNotFoundException {
         return getTemplate.getById(id, EducationDocumentDto.class);
     }
 
@@ -54,7 +55,7 @@ public class EducationDocumentServiceImpl extends AbstractCRUDEntityService<
 
 
     @Override
-    public EducationDocumentDto update(final Integer id, final EducationDocumentUpdateRequest updateRequest) throws BadRequestException {
+    public EducationDocumentDto update(final Integer id, final EducationDocumentUpdateRequest updateRequest) throws BadRequestException, ResourceNotFoundException {
         return updateTemplate.update(id, updateRequest, EducationDocumentDto.class);
     }
 

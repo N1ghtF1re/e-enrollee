@@ -2,6 +2,7 @@ package men.brakh.enrollment.application.template;
 
 import men.brakh.enrollment.domain.BaseEntity;
 import men.brakh.enrollment.exception.BadRequestException;
+import men.brakh.enrollment.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -47,8 +48,8 @@ public class DeleteTemplate<
      * @param id id
      * @throws BadRequestException if something went wrong.
      */
-    public void delete(I id) throws BadRequestException {
-        T entity = repository.findById(id).orElseThrow(() -> new BadRequestException("Entity isn't found"));
+    public void delete(I id) throws BadRequestException, ResourceNotFoundException {
+        T entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Entity isn't found"));
 
         beforeDeleting(entity);
 

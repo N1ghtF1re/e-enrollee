@@ -6,6 +6,7 @@ import men.brakh.enrollment.domain.BaseEntity;
 import men.brakh.enrollment.domain.Dto;
 import men.brakh.enrollment.exception.BadRequestException;
 import men.brakh.enrollment.application.mapping.presenter.EntityPresenter;
+import men.brakh.enrollment.exception.ResourceNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -39,8 +40,8 @@ public class GetTemplate<T extends BaseEntity,
      * @return entity mapped to dto
      * @throws BadRequestException if something went wrong
      */
-    public D getById(final I id, final Class<D> dtoClass) throws BadRequestException {
-        T entity = repository.findById(id).orElseThrow(() -> new BadRequestException(
+    public D getById(final I id, final Class<D> dtoClass) throws ResourceNotFoundException {
+        T entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(
                 "Entity " + dtoClass.getSimpleName().replaceAll("Dto", "") + " with id " + id + "isn't found")
         );
         return (D) presenter.mapToDto(entity, dtoClass);

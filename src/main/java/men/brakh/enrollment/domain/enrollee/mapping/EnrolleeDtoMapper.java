@@ -53,7 +53,7 @@ public class EnrolleeDtoMapper implements UpdateDtoMapper<EnrolleeUpdateRequest,
     }
 
     private Enrollee baseMapping(final Enrollee enrollee, final BaseEnrolleeDto dto) {
-
+        enrollee.setBirthDate(dto.getBirthDate());
         return enrollee;
     }
 }

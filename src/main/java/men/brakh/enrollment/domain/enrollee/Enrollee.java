@@ -1,19 +1,17 @@
 package men.brakh.enrollment.domain.enrollee;
 
-import javax.persistence.Column;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import men.brakh.enrollment.domain.BaseEntity;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import java.util.Date;
 
 @NoArgsConstructor
 @Data
@@ -41,7 +39,6 @@ public class Enrollee implements BaseEntity<Integer> {
     private String middleName;
 
     @NotNull(message = "Birth Date hasn't set or incorrect")
-    @Column(name = "birthDate")
     private Date birthDate;
 
     public String getFullName() {

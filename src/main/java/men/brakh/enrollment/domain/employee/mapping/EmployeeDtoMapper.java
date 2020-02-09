@@ -8,12 +8,12 @@ import men.brakh.enrollment.domain.employee.Role;
 import men.brakh.enrollment.domain.employee.dto.BaseEmployeeDto;
 import men.brakh.enrollment.domain.employee.dto.EmployeeDto;
 import men.brakh.enrollment.domain.employee.dto.EmployeeRegistrationRequest;
-import men.brakh.enrollment.domain.employee.dto.EmployeeUpdateReuqest;
+import men.brakh.enrollment.domain.employee.dto.EmployeeUpdateRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmployeeDtoMapper implements UpdateDtoMapper<EmployeeUpdateReuqest, Employee>,
+public class EmployeeDtoMapper implements UpdateDtoMapper<EmployeeUpdateRequest, Employee>,
     CreateDtoMapper<EmployeeRegistrationRequest, Employee>, DtoMapper<EmployeeDto, Employee>{
 
   private final ModelMapper modelMapper;
@@ -21,7 +21,7 @@ public class EmployeeDtoMapper implements UpdateDtoMapper<EmployeeUpdateReuqest,
   public EmployeeDtoMapper(final ModelMapper modelMapper) {
     this.modelMapper = modelMapper;
 
-    modelMapper.typeMap(EmployeeUpdateReuqest.class, Employee.class).addMappings(mp -> {
+    modelMapper.typeMap(EmployeeUpdateRequest.class, Employee.class).addMappings(mp -> {
       mp.skip(Employee::setRole);
     });
     modelMapper.typeMap(EmployeeRegistrationRequest.class, Employee.class).addMappings(mp -> {
@@ -39,7 +39,7 @@ public class EmployeeDtoMapper implements UpdateDtoMapper<EmployeeUpdateReuqest,
   }
 
   @Override
-  public Employee mapToEntity(final Employee entity, final EmployeeUpdateReuqest updateRequest) {
+  public Employee mapToEntity(final Employee entity, final EmployeeUpdateRequest updateRequest) {
     modelMapper.map(updateRequest, entity);
 
     return baseMapping(entity, updateRequest);

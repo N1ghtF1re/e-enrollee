@@ -11,6 +11,8 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import lombok.Data;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
 
@@ -18,7 +20,8 @@ import org.springframework.data.jpa.domain.Specification;
 public class SearchRequest implements Specification {
   private List<Condition> filters;
   private Sort sortBy;
-
+  private Integer page = 0;
+  private Integer pageSize = 15;
 
   @Override
   public Predicate toPredicate(final Root root,
@@ -35,6 +38,10 @@ public class SearchRequest implements Specification {
     } else {
       return criteriaBuilder.isTrue(criteriaBuilder.literal(true));
     }
+  }
+
+  public Pageable getPageable() {
+    return PageRequest.of(page, pageSize);
   }
 
   private void addSort(final Root root,

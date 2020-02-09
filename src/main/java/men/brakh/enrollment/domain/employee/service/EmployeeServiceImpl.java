@@ -9,9 +9,10 @@ import men.brakh.enrollment.domain.employee.Employee;
 import men.brakh.enrollment.domain.employee.Role;
 import men.brakh.enrollment.domain.employee.dto.EmployeeDto;
 import men.brakh.enrollment.domain.employee.dto.EmployeeRegistrationRequest;
-import men.brakh.enrollment.domain.employee.dto.EmployeeUpdateReuqest;
+import men.brakh.enrollment.domain.employee.dto.EmployeeUpdateRequest;
 import men.brakh.enrollment.domain.employee.repository.EmployeeRepository;
 import men.brakh.enrollment.exception.BadRequestException;
+import men.brakh.enrollment.exception.ResourceNotFoundException;
 import men.brakh.enrollment.security.credentials.EmployeeCredentials;
 import men.brakh.enrollment.security.credentials.EmployeeCredentialsRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,7 +27,7 @@ public class EmployeeServiceImpl extends AbstractCRUDEntityService<
     Employee,
     EmployeeDto,
     EmployeeRegistrationRequest,
-    EmployeeUpdateReuqest,
+    EmployeeUpdateRequest,
     Integer
     > implements EmployeeService{
 
@@ -47,7 +48,7 @@ public class EmployeeServiceImpl extends AbstractCRUDEntityService<
   }
 
   @Override
-  @PostMapping("/registration")
+  @PostMapping("/api/v1/registration")
   @Transactional(rollbackFor = Exception.class)
   public @ResponseBody EmployeeDto create(
       @RequestBody final EmployeeRegistrationRequest createRequest
@@ -70,13 +71,13 @@ public class EmployeeServiceImpl extends AbstractCRUDEntityService<
 
 
   @Override
-  public void delete(final Integer id) throws BadRequestException {
+  public void delete(final Integer id) throws BadRequestException, ResourceNotFoundException {
     deleteTemplate.delete(id);
 
   }
 
   @Override
-  public EmployeeDto getById(final Integer id) throws BadRequestException {
+  public EmployeeDto getById(final Integer id) throws ResourceNotFoundException {
     return getTemplate.getById(id, EmployeeDto.class);
   }
 
@@ -86,7 +87,7 @@ public class EmployeeServiceImpl extends AbstractCRUDEntityService<
   }
 
   @Override
-  public EmployeeDto update(final Integer id, final EmployeeUpdateReuqest updateRequest) throws BadRequestException {
+  public EmployeeDto update(final Integer id, final EmployeeUpdateRequest updateRequest) throws BadRequestException, ResourceNotFoundException {
     return updateTemplate.update(id, updateRequest, EmployeeDto.class);
   }
 

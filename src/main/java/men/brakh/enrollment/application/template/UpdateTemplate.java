@@ -8,6 +8,7 @@ import men.brakh.enrollment.domain.BaseEntity;
 import men.brakh.enrollment.domain.Dto;
 import men.brakh.enrollment.domain.UpdateDto;
 import men.brakh.enrollment.application.validation.utils.ValidationUtils;
+import men.brakh.enrollment.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -91,8 +92,8 @@ public class UpdateTemplate<
      * @throws BadRequestException if something went wrong
      */
     @SuppressWarnings("unchecked")
-    public D update(I id, R request, Class<? extends D> dtoClass) throws BadRequestException {
-        T entity = repository.findById(id).orElseThrow(() -> new BadRequestException("Entity isn't found"));
+    public D update(I id, R request, Class<? extends D> dtoClass) throws BadRequestException, ResourceNotFoundException {
+        T entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Entity isn't found"));
         entity = dtoMapper.mapToEntity(entity, request);
 
         entity.setId(id);

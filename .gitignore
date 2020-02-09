@@ -10,3 +10,4 @@ log/*
 *.iws
 db/
 logs/
+src/main/resources/application-local.properties

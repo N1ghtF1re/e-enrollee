@@ -1,11 +1,13 @@
 package men.brakh.enrollment.application.template;
 
 import java.util.List;
+import men.brakh.enrollment.application.mapping.presenter.EntityPresenter;
+import men.brakh.enrollment.application.search.SearchRequest;
+import men.brakh.enrollment.application.search.SearchResponse;
 import men.brakh.enrollment.domain.BaseEntity;
 import men.brakh.enrollment.domain.Dto;
 import men.brakh.enrollment.exception.BadRequestException;
-import men.brakh.enrollment.application.search.SearchRequest;
-import men.brakh.enrollment.application.mapping.presenter.EntityPresenter;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public class SearchTemplate<T extends BaseEntity, D extends Dto> {
@@ -19,10 +21,18 @@ public class SearchTemplate<T extends BaseEntity, D extends Dto> {
   }
 
   @SuppressWarnings("uncheked")
-  public List<D> search(final SearchRequest searchRequest, Class<D> dtoClass) throws BadRequestException {
+  public SearchResponse<D> search(final SearchRequest searchRequest, Class<D> dtoClass) throws BadRequestException {
     try {
-      final List<T> entities = specificationExecutor.findAll(searchRequest);
-      return presenter.mapListToDto(entities, dtoClass);
+
+      final Page<T> page = specificationExecutor.findAll(searchRequest,searchRequest.getPageable());
+      final List<D> content = presenter.mapListToDto(page.getContent(), dtoClass);
+
+      return SearchResponse.<D>builder()
+          .content(content)
+          .page(searchRequest.getPage())
+          .pageSize(searchRequest.getPageSize())
+          .totalPages(page.getTotalPages())
+          .build();
     } catch (Exception e) {
       throw new BadRequestException(e);
     }

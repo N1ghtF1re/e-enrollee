@@ -2,6 +2,7 @@ package men.brakh.enrollment.domain.enrollee.service;
 
 import java.util.List;
 import javax.validation.Validator;
+import men.brakh.enrollment.application.search.SearchResponse;
 import men.brakh.enrollment.domain.enrollee.Enrollee;
 import men.brakh.enrollment.domain.enrollee.dto.EnrolleeCreateRequest;
 import men.brakh.enrollment.domain.enrollee.dto.EnrolleeDto;
@@ -13,6 +14,7 @@ import men.brakh.enrollment.application.mapping.mapper.DtoMapper;
 import men.brakh.enrollment.application.mapping.presenter.EntityPresenter;
 import men.brakh.enrollment.application.service.AbstractCRUDEntityService;
 import men.brakh.enrollment.application.template.SearchTemplate;
+import men.brakh.enrollment.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Service
 @RestController
-@RequestMapping("/api/v1/enrollee")
+@RequestMapping("/api/v1/enrollees")
 public class EnrolleeServiceImpl extends AbstractCRUDEntityService<
         Enrollee,
         EnrolleeDto,
@@ -56,14 +58,14 @@ public class EnrolleeServiceImpl extends AbstractCRUDEntityService<
 
     @Override
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") final Integer id) throws BadRequestException {
+    public void delete(@PathVariable("id") final Integer id) throws BadRequestException, ResourceNotFoundException {
         deleteTemplate.delete(id);
 
     }
 
     @Override
     @GetMapping("/{id}")
-    public @ResponseBody EnrolleeDto getById(@PathVariable("id") final Integer id) throws BadRequestException {
+    public @ResponseBody EnrolleeDto getById(@PathVariable("id") final Integer id) throws ResourceNotFoundException {
         return getTemplate.getById(id, EnrolleeDto.class);
     }
 
@@ -77,12 +79,13 @@ public class EnrolleeServiceImpl extends AbstractCRUDEntityService<
     @PutMapping("/{id}")
     public @ResponseBody EnrolleeDto update(@PathVariable("id") final Integer id,
                                             @RequestBody final EnrolleeUpdateRequest updateRequest
-    ) throws BadRequestException {
+    ) throws BadRequestException, ResourceNotFoundException {
         return updateTemplate.update(id, updateRequest, EnrolleeDto.class);
     }
 
     @PostMapping("/search")
-    public @ResponseBody List<EnrolleeDto> search(@RequestBody final SearchRequest searchRequest) throws BadRequestException {
+    public @ResponseBody
+    SearchResponse<EnrolleeDto> search(@RequestBody final SearchRequest searchRequest) throws BadRequestException {
         return searchTemplate.search(searchRequest, EnrolleeDto.class);
     }
 }

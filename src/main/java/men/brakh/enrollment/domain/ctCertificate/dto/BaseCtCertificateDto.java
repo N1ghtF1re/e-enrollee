@@ -17,4 +17,5 @@ public abstract class BaseCtCertificateDto implements Dto {
     private String certificateNumber;
     private String subject;
     private Integer year;
+    private Integer enrolleeId;
 }

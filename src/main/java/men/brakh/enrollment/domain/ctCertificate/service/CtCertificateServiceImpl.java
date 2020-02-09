@@ -3,6 +3,9 @@ package men.brakh.enrollment.domain.ctCertificate.service;
 import java.util.List;
 import javax.transaction.Transactional;
 import javax.validation.Validator;
+import men.brakh.enrollment.application.search.SearchRequest;
+import men.brakh.enrollment.application.search.SearchResponse;
+import men.brakh.enrollment.application.template.SearchTemplate;
 import men.brakh.enrollment.domain.ctCertificate.CtCertificate;
 import men.brakh.enrollment.domain.ctCertificate.Subject;
 import men.brakh.enrollment.domain.ctCertificate.dto.CtCertificateCreateRequest;
@@ -37,6 +40,7 @@ public class CtCertificateServiceImpl extends AbstractCRUDEntityService<
         > implements CtCertificateService {
 
     private CtCertificateRepository ctCertificateRepository;
+    private SearchTemplate<CtCertificate, CtCertificateDto> searchTemplate;
 
 
     public CtCertificateServiceImpl(final CtCertificateRepository crudRepository,
@@ -47,6 +51,10 @@ public class CtCertificateServiceImpl extends AbstractCRUDEntityService<
         super(crudRepository, dtoMapper, entityPresenter, validator);
 
         ctCertificateRepository = crudRepository;
+        this.searchTemplate = new SearchTemplate<>(
+            crudRepository,
+            entityPresenter
+        );
     }
 
 
@@ -56,9 +64,9 @@ public class CtCertificateServiceImpl extends AbstractCRUDEntityService<
         @RequestBody final CtCertificateCreateRequest createRequest
     ) throws BadRequestException {
         throwIfCertificateWithYearAndSubjectAlreadyExist(createRequest.getEnrolleeId(),
-            createRequest.getYear(), createRequest.getSubject());
+            createRequest.getYear(), createRequest.getSubject(), null);
         throwIfCertificateWithIdentifierAndNumberAlreadyExist(createRequest.getCertificateIdentifier(),
-                createRequest.getCertificateNumber());
+                createRequest.getCertificateNumber(), null);
 
         return createTemplate.save(createRequest, CtCertificateDto.class);
     }
@@ -85,15 +93,17 @@ public class CtCertificateServiceImpl extends AbstractCRUDEntityService<
 
     @Override
     @PutMapping("/{id}")
-    public @ResponseBody CtCertificateDto update(@PathVariable("id") final Integer id,
-                                   @RequestBody final CtCertificateUpdateRequest updateRequest) throws BadRequestException, ResourceNotFoundException {
+    public @ResponseBody CtCertificateDto update(
+        @PathVariable("id") final Integer id,
+        @RequestBody final CtCertificateUpdateRequest updateRequest
+    ) throws BadRequestException, ResourceNotFoundException {
 
         final CtCertificate ctCertificate = ctCertificateRepository.findById(id).orElseThrow(BadRequestException::new);
 
         throwIfCertificateWithYearAndSubjectAlreadyExist(ctCertificate.getEnrollee().getId(),
-            updateRequest.getYear(), updateRequest.getSubject());
+            updateRequest.getYear(), updateRequest.getSubject(), id);
         throwIfCertificateWithIdentifierAndNumberAlreadyExist(updateRequest.getCertificateIdentifier(),
-            updateRequest.getCertificateNumber());
+            updateRequest.getCertificateNumber(), id);
 
         return updateTemplate.update(id, updateRequest, CtCertificateDto.class);
     }
@@ -106,24 +116,52 @@ public class CtCertificateServiceImpl extends AbstractCRUDEntityService<
         );
     }
 
+    @Override
+    @PostMapping(path = "search")
+    public @ResponseBody SearchResponse<CtCertificateDto> search(
+        @RequestBody final SearchRequest searchRequest
+    ) throws BadRequestException {
+        return searchTemplate.search(searchRequest, CtCertificateDto.class);
+    }
 
 
-    private void throwIfCertificateWithYearAndSubjectAlreadyExist(final Integer enrolleeId, final Integer year, final String subjectString)
+    private void throwIfCertificateWithYearAndSubjectAlreadyExist(
+        final Integer enrolleeId,
+        final Integer year,
+        final String subjectString,
+        final Integer certificateId
+    )
         throws BadRequestException {
         Subject subject = subjectString != null ? Subject.valueOf(subjectString) : null;
         List<CtCertificate> ctCertificates = ctCertificateRepository
             .findAllByEnrolleeIdAndYearAndSubject(enrolleeId, year, subject);
         if (ctCertificates.size() > 0) {
-            throw new BadRequestException("You already have " + subjectString + " certificate for " + year + " year");
+            final boolean certificateHasAnotherId = certificateId != null
+                && ctCertificates.stream()
+                .anyMatch(ctCertificate -> !ctCertificate.getId().equals(certificateId));
+
+            if (certificateHasAnotherId) {
+                throw new BadRequestException("You already have " + subjectString + " certificate for " + year + " year");
+            }
         }
     }
 
-    private void throwIfCertificateWithIdentifierAndNumberAlreadyExist(final String identifier, String number) throws BadRequestException {
+    private void throwIfCertificateWithIdentifierAndNumberAlreadyExist(
+        final String identifier,
+        final String number,
+        final Integer certificateId
+    ) throws BadRequestException {
         List<CtCertificate> ctCertificates = ctCertificateRepository
             .findAllByCertificateIdentifierAndCertificateNumber(identifier, number);
         if (ctCertificates.size() > 0) {
-            throw new BadRequestException("You already have ct certificate with identifier "
-                + identifier + " and number " + number);
+            final boolean certificateHasAnotherId = certificateId != null
+                && ctCertificates.stream()
+                .anyMatch(ctCertificate -> !ctCertificate.getId().equals(certificateId));
+
+            if (certificateHasAnotherId) {
+                throw new BadRequestException("You already have ct certificate with identifier "
+                    + identifier + " and number " + number);
+            }
         }
     }
 }

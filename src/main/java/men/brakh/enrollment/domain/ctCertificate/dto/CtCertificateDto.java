@@ -13,37 +13,16 @@ public class CtCertificateDto extends BaseCtCertificateDto implements Comparable
 
     private Integer id;
     private String enrolleeName;
-    private Integer enrolleeId;
-
-    @Builder
-    public CtCertificateDto(final Integer ctPoints,
-                            final String certificateId,
-                            final String certificateNumber,
-                            final String subject,
-                            final Integer id,
-                            final Integer year,
-                            final String enrolleeName,
-                            final Integer enrolleeId) {
-        super(ctPoints, certificateId, certificateNumber, subject, year);
-        this.id = id;
-        this.enrolleeId = enrolleeId;
-        this.enrolleeName = enrolleeName;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%d | %-50s | %s | %s | %-20s | %d / 100 | %s year",
-                id,
-                getEnrolleeName(),
-                getCertificateIdentifier(),
-                getCertificateNumber(),
-                getSubject(),
-                getCtPoints(),
-                getYear());
-    }
 
     @Override
     public int compareTo(final CtCertificateDto ctCertificateDto) {
         return this.enrolleeName.compareTo(ctCertificateDto.enrolleeName);
+    }
+
+    @Builder
+    public CtCertificateDto(final Integer ctPoints, final String certificateIdentifier, final String certificateNumber, final String subject, final Integer year, final Integer enrolleeId, final Integer id, final String enrolleeName) {
+        super(ctPoints, certificateIdentifier, certificateNumber, subject, year, enrolleeId);
+        this.id = id;
+        this.enrolleeName = enrolleeName;
     }
 }

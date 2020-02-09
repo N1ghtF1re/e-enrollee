@@ -18,10 +18,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import men.brakh.enrollment.application.validation.NotFutureYear;
 import men.brakh.enrollment.domain.BaseEntity;
 import men.brakh.enrollment.domain.ParentAware;
 import men.brakh.enrollment.domain.enrollee.Enrollee;
-import men.brakh.enrollment.application.validation.NotFutureYear;
 
 @NoArgsConstructor
 @Data

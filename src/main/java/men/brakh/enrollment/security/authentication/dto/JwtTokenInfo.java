@@ -1,4 +1,4 @@
-package men.brakh.enrollment.security.dto;
+package men.brakh.enrollment.security.authentication.dto;
 
 import lombok.Builder;
 import lombok.Data;

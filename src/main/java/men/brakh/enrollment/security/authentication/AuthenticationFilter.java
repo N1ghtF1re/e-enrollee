@@ -1,4 +1,4 @@
-package men.brakh.enrollment.security;
+package men.brakh.enrollment.security.authentication;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import java.io.IOException;
@@ -7,8 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import men.brakh.enrollment.exception.UnauthorizedException;
-import men.brakh.enrollment.security.credentials.UserDetailsServiceImpl;
-import men.brakh.enrollment.security.jwt.JwtService;
+import men.brakh.enrollment.security.authentication.credentials.UserDetailsServiceImpl;
+import men.brakh.enrollment.security.authentication.jwt.JwtService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

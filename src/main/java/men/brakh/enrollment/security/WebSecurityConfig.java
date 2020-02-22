@@ -1,6 +1,7 @@
 package men.brakh.enrollment.security;
 
-import men.brakh.enrollment.security.credentials.UserDetailsServiceImpl;
+import men.brakh.enrollment.security.authentication.AuthenticationFilter;
+import men.brakh.enrollment.security.authentication.credentials.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package men.brakh.enrollment.security.credentials;
+package men.brakh.enrollment.security.authentication.credentials;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

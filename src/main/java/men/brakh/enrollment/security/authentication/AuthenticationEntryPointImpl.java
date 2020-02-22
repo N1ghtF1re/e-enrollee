@@ -1,4 +1,4 @@
-package men.brakh.enrollment.security;
+package men.brakh.enrollment.security.authentication;
 
 import java.io.IOException;
 import java.io.Serializable;

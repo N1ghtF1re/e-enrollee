@@ -1,4 +1,4 @@
-package men.brakh.enrollment.security.credentials;
+package men.brakh.enrollment.security.authentication.credentials;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

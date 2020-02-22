@@ -1,4 +1,4 @@
-package men.brakh.enrollment.security.jwt;
+package men.brakh.enrollment.security.authentication.jwt;
 
 import lombok.Getter;
 import lombok.Setter;

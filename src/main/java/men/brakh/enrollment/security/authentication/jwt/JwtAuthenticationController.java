@@ -1,11 +1,11 @@
-package men.brakh.enrollment.security.jwt;
+package men.brakh.enrollment.security.authentication.jwt;
 
 
 import men.brakh.enrollment.exception.UnauthorizedException;
-import men.brakh.enrollment.security.credentials.UserDetailsServiceImpl;
-import men.brakh.enrollment.security.dto.AuthenticationRequest;
-import men.brakh.enrollment.security.dto.AuthenticationResponse;
-import men.brakh.enrollment.security.dto.JwtTokenInfo;
+import men.brakh.enrollment.security.authentication.credentials.UserDetailsServiceImpl;
+import men.brakh.enrollment.security.authentication.dto.AuthenticationRequest;
+import men.brakh.enrollment.security.authentication.dto.AuthenticationResponse;
+import men.brakh.enrollment.security.authentication.dto.JwtTokenInfo;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

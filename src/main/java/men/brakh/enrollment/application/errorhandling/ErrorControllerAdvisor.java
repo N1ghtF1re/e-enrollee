@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -41,6 +42,14 @@ public class ErrorControllerAdvisor extends ResponseEntityExceptionHandler {
       final WebRequest request
   ) {
     return processUnhandledException(ex, request, HttpStatus.UNAUTHORIZED);
+  }
+
+  @ExceptionHandler(AccessDeniedException.class)
+  public ResponseEntity<Object> handleForbiddenException(
+      final AccessDeniedException ex,
+      final WebRequest request
+  ) {
+    return processUnhandledException(ex, request, HttpStatus.FORBIDDEN);
   }
 
   @ExceptionHandler(Exception.class)

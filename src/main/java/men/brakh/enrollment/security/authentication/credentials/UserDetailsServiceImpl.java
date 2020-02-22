@@ -1,4 +1,4 @@
-package men.brakh.enrollment.security.credentials;
+package men.brakh.enrollment.security.authentication.credentials;
 
 import men.brakh.enrollment.domain.employee.Employee;
 import men.brakh.enrollment.domain.employee.repository.EmployeeRepository;

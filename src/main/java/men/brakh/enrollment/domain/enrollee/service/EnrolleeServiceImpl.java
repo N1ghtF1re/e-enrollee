@@ -15,6 +15,7 @@ import men.brakh.enrollment.application.mapping.presenter.EntityPresenter;
 import men.brakh.enrollment.application.service.AbstractCRUDEntityService;
 import men.brakh.enrollment.application.template.SearchTemplate;
 import men.brakh.enrollment.exception.ResourceNotFoundException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -77,6 +78,7 @@ public class EnrolleeServiceImpl extends AbstractCRUDEntityService<
 
     @Override
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public @ResponseBody EnrolleeDto update(@PathVariable("id") final Integer id,
                                             @RequestBody final EnrolleeUpdateRequest updateRequest
     ) throws BadRequestException, ResourceNotFoundException {

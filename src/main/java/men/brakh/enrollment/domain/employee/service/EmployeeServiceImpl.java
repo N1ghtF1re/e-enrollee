@@ -1,6 +1,7 @@
 package men.brakh.enrollment.domain.employee.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.validation.Validator;
 import men.brakh.enrollment.application.mapping.mapper.DtoMapper;
 import men.brakh.enrollment.application.mapping.presenter.EntityPresenter;
@@ -13,10 +14,15 @@ import men.brakh.enrollment.domain.employee.dto.EmployeeUpdateRequest;
 import men.brakh.enrollment.domain.employee.repository.EmployeeRepository;
 import men.brakh.enrollment.exception.BadRequestException;
 import men.brakh.enrollment.exception.ResourceNotFoundException;
-import men.brakh.enrollment.security.credentials.EmployeeCredentials;
-import men.brakh.enrollment.security.credentials.EmployeeCredentialsRepository;
+import men.brakh.enrollment.security.authentication.credentials.EmployeeCredentials;
+import men.brakh.enrollment.security.authentication.credentials.EmployeeCredentialsRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -67,6 +73,14 @@ public class EmployeeServiceImpl extends AbstractCRUDEntityService<
     employeeCredentialsRepository.save(employeeCredentials);
 
     return employeeDto;
+  }
+
+  @GetMapping("api/v1/me/roles")
+  public List<String> getMyPermissions() {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    return ((User) auth.getPrincipal()).getAuthorities().stream()
+        .map(GrantedAuthority::getAuthority)
+        .collect(Collectors.toList());
   }
 
 
